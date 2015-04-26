@@ -2,36 +2,43 @@
 var conceptMap = [
         {
           econ: "ValueAdd",
+          econTitle: "Value Add",
           score: "DemandScore"
         },
 
         {
           econ: "Exports",
+          econTitle: "Exports",
           score: "ExportScore"
         },
 
         {
           econ: "BusinessInvestment",
+          econTitle: "Business Investment",
           score: "InvestmentScore"
         },
 
         {
           econ: "Employment",
+          econTitle: "Total Employment",
           score: "EmploymentScore"
         },
 
         {
           econ: "AWETot",
+          econTitle: "Average Weekly Earnings: Total",
           score: "TotalLabourCostsScore"
         },
 
         {
           econ: "AWEReg",
+          econTitle: "Average Weekly Earnings: Regular Pay",
           score: "PayScore"
         },
 
         {
           econ: "GrossOperatingSurplus",
+          econTitle: "Gross Operating Surplus",
           score: "PreTaxProfitsScore"
         }
         ];
@@ -51,183 +58,207 @@ function cvsmap(econ, conceptMap){
 }
 var globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
 
+d3.select("#EconDropDown select")
+  .selectAll("option")
+  .data(conceptMap)
+  .enter()
+  .append("option")
+  .text(function(d) { return d.econTitle; } )
+  .attr("value", function(d) { return d.econ; } );
 
-d3.csv("econdata.csv", function(error, data){
+// d3.select("#EconDropDown select")
+//   .on("change", function(){
+//   })
 
-    function econData(concept) {
+var econChange = function(){
+  globalEconConcept = d3.event.target.value;
+  globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
+  drawGraphs(globalEconConcept, globalCurrentOrFuture, globalSector, globalDate);
+};
 
-        var parseDate = d3.time.format("%m/%d/%Y").parse;
+d3.select("#EconDropDown select")
+  .on("change", econChange);
 
-        var econSeries = [];
+function drawGraphs(globalEconConcept, globalCurrentOrFuture, globalSector, globalDate){
 
-        data.forEach(function(d){
-            econSeries.push({
-                x : parseDate(d.date), y : +d[concept]
-            });
-        });
+  d3.csv("econdata.csv", function(error, data){
 
-        return [
-            {
-                key: concept,
-                values: econSeries,
-                color: "#0000ff"
-            }];
+      function econData(concept) {
 
-    }
+          var parseDate = d3.time.format("%m/%d/%Y").parse;
 
-    nv.addGraph(function() {
-        var chart = nv.models.lineChart()
-            .useInteractiveGuideline(true);
+          var econSeries = [];
 
-        chart.xAxis
-            .axisLabel("Date")
-            .tickFormat(function(d) { return d3.time.format('%b %Y')(new Date(d)); });
-
-        chart.yAxis
-            .axisLabel("Average Company Visit Score")
-            .tickFormat(d3.format('.02f'))
-            ;
-
-
-
-        d3.select("#EconChart svg")
-            .datum(econData(globalEconConcept))
-            .transition().duration(500).call(chart);
-
-        nv.utils.windowResize(
-                function() {
-                    chart.update();
-                }
-            );
-
-        return chart;
-    });
-
-});
-
-/////////////////////////////////////////////////////////////////////////
-
-d3.csv("meancvs.csv", function(error, data){
-
-    function meanCVSData(concept, sector, currentOrFuture) {
-
-        var parseDate = d3.time.format("%m/%d/%Y").parse;
-
-        var cvsSeries = [];
-
-        data.forEach(function(d){
-          if(d.Sector == sector && d.ScoreType == currentOrFuture){
-              cvsSeries.push({
+          data.forEach(function(d){
+              econSeries.push({
                   x : parseDate(d.date), y : +d[concept]
               });
+          });
+
+          return [
+              {
+                  key: concept,
+                  values: econSeries,
+                  color: "#0000ff"
+              }];
+
+      }
+
+      nv.addGraph(function() {
+          var chart = nv.models.lineChart()
+              .useInteractiveGuideline(true);
+
+          chart.xAxis
+              .axisLabel("Date")
+              .tickFormat(function(d) { return d3.time.format("%b %Y")(new Date(d)); });
+
+          chart.yAxis
+              .axisLabel("Average Company Visit Score")
+              .tickFormat(d3.format(".02f"))
+              ;
+
+
+
+          d3.select("#EconChart svg")
+              .datum(econData(globalEconConcept))
+              .transition().duration(500).call(chart);
+
+          nv.utils.windowResize(
+                  function() {
+                      chart.update();
+                  }
+              );
+
+          return chart;
+      });
+
+  });
+
+  /////////////////////////////////////////////////////////////////////////
+
+  d3.csv("meancvs.csv", function(error, data){
+
+      function meanCVSData(concept, sector, currentOrFuture) {
+
+          var parseDate = d3.time.format("%m/%d/%Y").parse;
+
+          var cvsSeries = [];
+
+          data.forEach(function(d){
+            if(d.Sector == sector && d.ScoreType == currentOrFuture){
+                cvsSeries.push({
+                    x : parseDate(d.date), y : +d[concept]
+                });
+            }
+          });
+
+
+
+          return [
+              {
+                  key: concept,
+                  values: cvsSeries,
+                  color: "#0000ff"
+              }];
+
+      }
+
+      nv.addGraph(function() {
+          var chart = nv.models.lineChart()
+              .useInteractiveGuideline(true);
+
+          chart.xAxis
+              .axisLabel("Date")
+              .tickFormat(function(d) { return d3.time.format("%b %Y")(new Date(d)); });
+
+          chart.yAxis
+              .axisLabel("Average Company Visit Score")
+              .tickFormat(d3.format(".02f"))
+              ;
+
+
+
+          d3.select("#CVSChart svg")
+              .datum(meanCVSData(globalCVSConcept, globalSector, globalCurrentOrFuture))
+              .transition().duration(500).call(chart);
+
+          nv.utils.windowResize(
+                  function() {
+                      chart.update();
+                  }
+              );
+
+          return chart;
+      });
+
+  });
+
+  /////////////////////////////////////////////////////////////////////////
+
+  d3.csv("agents.csv", function(error, data){
+
+    function surveyData(sector, ActualDate, currentOrFuture, concept){
+      // var parseDate = d3.time.format("%m/%d/%Y").parse;
+      var surveyCounts = [0,0,0,0,0,0,0,0,0,0,0];
+
+      // data.forEach(function(d){
+      //   d.ActualDateDisplay = parseDate(d.ActualDateDisplay);
+      // })
+
+      data.forEach(function(d){
+        if(sector == "Total"){
+          if(d.ActualDateDisplay == ActualDate &&
+              d.ScoreType == currentOrFuture){
+            surveyCounts[+d[concept]+5] += 1;
           }
+        } else {
+          if(d.Sector == sector &&
+              d.ActualDateDisplay == ActualDate &&
+              d.ScoreType == currentOrFuture){
+            surveyCounts[+d[concept]+5] += 1;
+          }
+        }
+      });
+
+      var returnData = [];
+
+      surveyCounts.forEach(function(d, i){
+        returnData.push({
+          label: String(i-5),
+          value: +surveyCounts[i]
         });
+      });
 
-
-
-        return [
-            {
-                key: concept,
-                values: cvsSeries,
-                color: "#0000ff"
-            }];
-
+      return [
+        {
+          key: "Company Visit Scores",
+          values: returnData
+        }];
     }
 
     nv.addGraph(function() {
-        var chart = nv.models.lineChart()
-            .useInteractiveGuideline(true);
 
-        chart.xAxis
-            .axisLabel("Date")
-            .tickFormat(function(d) { return d3.time.format('%b %Y')(new Date(d)); });
-
-        chart.yAxis
-            .axisLabel("Average Company Visit Score")
-            .tickFormat(d3.format('.02f'))
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label; })
+            .y(function(d) { return d.value; })
+            .staggerLabels(true)
+            //.staggerLabels(historicalBarChart[0].values.length > 8)
+            .tooltips(true)
+            .showValues(false)
+            .duration(250)
             ;
 
+        chart.yAxis
+          .axisLabel("Number of Company Visits")
+          .tickFormat(function(d){ return Math.round(d); });  
 
-
-        d3.select("#CVSChart svg")
-            .datum(meanCVSData(globalCVSConcept, globalSector, globalCurrentOrFuture))
-            .transition().duration(500).call(chart);
-
-        nv.utils.windowResize(
-                function() {
-                    chart.update();
-                }
-            );
-
+        d3.select("#CVSHist svg")
+            .datum(surveyData(globalSector,globalDate, globalCurrentOrFuture, globalCVSConcept))
+            .call(chart);
+        nv.utils.windowResize(function() { chart.update(); } );
         return chart;
     });
 
-});
-
-/////////////////////////////////////////////////////////////////////////
-
-d3.csv("agents.csv", function(error, data){
-
-  function surveyData(sector, ActualDate, currentOrFuture, concept){
-    // var parseDate = d3.time.format("%m/%d/%Y").parse;
-    var surveyCounts = [0,0,0,0,0,0,0,0,0,0,0];
-
-    // data.forEach(function(d){
-    //   d.ActualDateDisplay = parseDate(d.ActualDateDisplay);
-    // })
-
-    data.forEach(function(d){
-      if(sector == "Total"){
-        if(d.ActualDateDisplay == ActualDate &&
-            d.ScoreType == currentOrFuture){
-          surveyCounts[+d[concept]+5] += 1;
-        }
-      } else {
-        if(d.Sector == sector &&
-            d.ActualDateDisplay == ActualDate &&
-            d.ScoreType == currentOrFuture){
-          surveyCounts[+d[concept]+5] += 1;
-        }
-      }
-    });
-
-    var returnData = [];
-
-    surveyCounts.forEach(function(d, i){
-      returnData.push({
-        label: String(i-5),
-        value: +surveyCounts[i]
-      });
-    });
-
-    return [
-      {
-        key: "Company Visit Scores",
-        values: returnData
-      }]
-  }
-
-  nv.addGraph(function() {
-
-      var chart = nv.models.discreteBarChart()
-          .x(function(d) { return d.label })
-          .y(function(d) { return d.value })
-          .staggerLabels(true)
-          //.staggerLabels(historicalBarChart[0].values.length > 8)
-          .tooltips(true)
-          .showValues(false)
-          .duration(250)
-          ;
-
-      chart.yAxis
-        .axisLabel("Number of Company Visits")
-        .tickFormat(function(d){ return Math.round(d); });  
-
-      d3.select('#CVSHist svg')
-          .datum(surveyData(globalSector,globalDate, globalCurrentOrFuture, globalCVSConcept))
-          .call(chart);
-      nv.utils.windowResize(function() { chart.update(); } );
-      return chart;
   });
 
-});
+}
