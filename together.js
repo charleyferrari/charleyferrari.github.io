@@ -46,6 +46,16 @@ var globalCurrentOrFuture = "Current";
 var globalEconConcept = "ValueAdd";
 var globalSector = "Total";
 var globalDate = "7/1/2008";
+var sectorList = ["Total", "Business and financial services", 
+  "Distribution, hotels, catering, arts, entertainment, recreation and other services",
+  "Production", "Transport, storage and communications"];
+
+var dateList = ["1/1/2008", "4/1/2008", "7/1/2008", "10/1/2008",
+                "1/1/2009", "4/1/2009", "7/1/2009", "10/1/2009",
+                "1/1/2010", "4/1/2010", "7/1/2010", "10/1/2010",
+                "1/1/2011", "4/1/2011", "7/1/2011", "10/1/2011",
+                "1/1/2012", "4/1/2012", "7/1/2012", "10/1/2012"];
+
 
 function cvsmap(econ, conceptMap){
   var cvs;
@@ -57,6 +67,8 @@ function cvsmap(econ, conceptMap){
   return cvs;
 }
 var globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
+
+d3.select("#EconDropDown").append("select");
 
 d3.select("#EconDropDown select")
   .selectAll("option")
@@ -73,13 +85,79 @@ d3.select("#EconDropDown select")
 var econChange = function(){
   globalEconConcept = d3.event.target.value;
   globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
-  drawGraphs(globalEconConcept, globalCurrentOrFuture, globalSector, globalDate);
+  drawEconGraph();
+
+  if(d3.select("CurrentOrFutureDropDown select").empty()){
+    d3.select("#CurrentOrFutureDropDown").append("select");
+  }
+
+  d3.select("#CurrentOrFutureDropDown select")
+    .selectAll("option")
+    .data(["Current", "Future"])
+    .enter()
+    .append("option")
+    .text(function(d) { return d; } )
+    .attr("value", function(d) { return d; } );
+
+  var currentOrFutureChange = function(){
+    globalCurrentOrFuture = d3.event.target.value;
+    drawMeanCVSGraph();
+  
+    if(d3.select("#DateDropDown select").empty()){
+      d3.select("#DateDropDown").append("select");
+    }
+    
+    d3.select("#DateDropDown select")
+      .selectAll("option")
+      .data(dateList)
+      .enter()
+      .append("option")
+      .text(function(d) { return d; } )
+      .attr("value", function(d) { return d; } );
+
+    var dateChange = function(){
+      globalDate = d3.event.target.value;
+      drawCVSHist();
+
+      if(d3.select("#SectorDropDown select").empty()){
+        d3.select("#SectorDropDown").append("select");  
+      }
+
+      d3.select("#SectorDropDown select")
+        .selectAll("option")
+        .data(sectorList)
+        .enter()
+        .append("option")
+        .text(function(d) { return d; } )
+        .attr("value", function(d) { return d; } );
+
+      var sectorChange = function(){
+        globalSector = d3.event.target.value;
+        drawMeanCVSGraph();
+        drawCVSHist();
+      };
+
+      d3.select("#SectorDropDown select")
+        .on("change", sectorChange);
+    };
+
+    d3.select("#DateDropDown select")
+      .on("change", dateChange);
+  };
+
+  d3.select("#CurrentOrFutureDropDown select")
+    .on("change", currentOrFutureChange);
+
 };
 
 d3.select("#EconDropDown select")
   .on("change", econChange);
 
-function drawGraphs(globalEconConcept, globalCurrentOrFuture, globalSector, globalDate){
+
+
+// function drawEconGraph(globalEconConcept, globalCurrentOrFuture, globalSector, globalDate){
+
+function drawEconGraph(){
 
   d3.csv("econdata.csv", function(error, data){
 
@@ -134,7 +212,11 @@ function drawGraphs(globalEconConcept, globalCurrentOrFuture, globalSector, glob
 
   });
 
+}
+
   /////////////////////////////////////////////////////////////////////////
+
+function drawMeanCVSGraph(){
 
   d3.csv("meancvs.csv", function(error, data){
 
@@ -193,7 +275,11 @@ function drawGraphs(globalEconConcept, globalCurrentOrFuture, globalSector, glob
 
   });
 
+}
+
   /////////////////////////////////////////////////////////////////////////
+
+function drawCVSHist(){
 
   d3.csv("agents.csv", function(error, data){
 
