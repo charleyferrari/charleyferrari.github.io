@@ -102,6 +102,9 @@ var econChange = function(){
   var currentOrFutureChange = function(){
     globalCurrentOrFuture = d3.event.target.value;
     drawMeanCVSGraph();
+    if(!d3.select("#CVSHist svg g").empty()){
+      drawCVSHist();
+    }
   
     if(d3.select("#DateDropDown select").empty()){
       d3.select("#DateDropDown").append("select");
