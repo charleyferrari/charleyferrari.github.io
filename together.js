@@ -87,7 +87,7 @@ var econChange = function(){
   globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
   drawEconGraph();
 
-  if(d3.select("CurrentOrFutureDropDown select").empty()){
+  if(d3.select("#CurrentOrFutureDropDown select").empty()){
     d3.select("#CurrentOrFutureDropDown").append("select");
   }
 
