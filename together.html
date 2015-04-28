@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>My First Chart</title>
+        <title>Visualizing Company Visit Scores From the Bank of England</title>
         <link href="d3/nv.d3.css" rel="stylesheet" type="text/css">
         <style>
             text {
@@ -17,9 +17,10 @@
                 height: 100%;
                 width: 100%;
             }
+            .hidden { display: none;}
         </style>
-        <script src="d3/d3.min.js"></script>
-        <script src="d3/nv.d3.min.js"></script>
+        <script src="d3/d3.js"></script>
+        <script src="d3/nv.d3.js"></script>
     </head>
     <body>
 
@@ -29,15 +30,76 @@
             <option value="test3">test3</option>
         </select> -->
 
+        <div id="EconDescription"></div>
+
         <div id="EconDropDown">
             <!-- <select></select> -->
         </div>
+
+        <div id="EconDescription2"></div>
         <div id="EconChart">
             <svg style='height:600px'/>
+        </div>
+        <div id="EconDescription3" class="hidden">
+            <p>The Bank of England performs a quarterly survey of the Business community across the UK. Included in these surveys 
+                is a set of quantitative scores. These scores range from a low of -5 to a high of 5, and across eleven economic 
+                concepts: demand (nominal turnover), exports, investment, capacity utilisation, employment, recruitment 
+                conditions, total labour costs per employee, pay (salary per employee), non-labour costs, output prices, and 
+                profits (growth in pre-tax profit as share of turnover).</p>
+            <p>According to their documentation: <a href="http://www.bankofengland.co.uk/publications/Documents/quarterlybulletin/2013/qb130106.pdf">The Agents' Company Visit Scores</a>, The Bank of
+                England mapped seven of these score concepts to headline economic concepts coming from the Office of National 
+                Statistics:</p>
+            <table>
+                <tr>
+                    <th>ONS Economic Concept</th>
+                    <th>Company Visit Score Concept</th>
+                </tr>
+                <tr>
+                    <td>Value Add</td>
+                    <td>Demand (Nominal Turnover)</td>
+                </tr>
+                <tr>
+                    <td>Exports</td>
+                    <td>Exports</td>
+                </tr>
+                <tr>
+                    <td>Business Investment</td>
+                    <td>Investment</td>
+                </tr>
+                <tr>
+                    <td>Total Employment</td>
+                    <td>Employment</td>
+                </tr>
+                <tr>
+                    <td>Average Weekly Earnings: Total</td>
+                    <td>Total Labour Costs per employee</td>
+                </tr>
+                <tr>
+                    <td>Average Weekly Earnings: Regular Pay</td>
+                    <td>Pay (Salary per employee)</td>
+                </tr>
+                <tr>
+                    <td>Gross Operating Surplus</td>
+                    <td>Profits (Growth in pre-tax profit as share of turnover)</td>
+                </tr>
+            </table>
+            <p>In addition, each of these scores have a current and a future component. Because the economic concepts are time
+                series, the first comparison one could highlight of these scores is to view how average company visit scores have 
+                changed over time. In this initial level of analysis, the future scores, when aggregated, should show some insight
+                into how the economic concepts are expected to evolve. Below you can choose either current or future from the drop
+                down menu:</p>
         </div>
         <div id="CurrentOrFutureDropDown"></div>
         <div id="CVSChart">
             <svg style='height:600px' />
+        </div>
+        <div id="MeanCVSDescription" class="hidden">
+            <p>The mean company visit scores, for most concepts, track the percent changes of their corresponding economic
+                concepts. While the future scores give some foresight into how economic concepts will evolve, the real 
+                strength of having access to the underlying company scores is to get an idea of the distribution of scores
+                in the economy.</p>
+            <p>The scores released from the Bank of England include dates and broad industries to identify them. Below, choosing a
+                date from the drop down menu will show a distribution of the scores at that point in time.</p>
         </div>
         <div id="DateDropDown">
             <!-- <select></select> -->
@@ -48,7 +110,35 @@
         <div id="CVSHist">
             <svg style='height:600px'/>
         </div>
+        <div id="CVSHistDescription" class="hidden">
+            <p>In these histograms, you can see how the distribution of company visit scores change over time. In a lot of cases,
+                one can visualize a near normal distribution moving back and forth depending on what its mean score is. Many
+                concepts have a spike at score 0, perhaps highlighting a human preference in the scoring.</p>
+            <p>As mentioned above, these scores are coded by broad sector. Selecting a sector from the drop down below will 
+                update the histogram to display the distribution for that particular industry. In addition, the average company
+                visit score line graph will be updated as well.</p>
+            <p>This allows someone to seamlessly move across different scales, and see how changes in scales roll up to average
+                behavior. The more differentiated classifications available, the more useful this sort of tool would be. For 
+                example, if demographic and geographic data were added to these scores for example, one could filter by the 
+                gender of the proprietor to see if women are more successful business owners in certain regions.</p>
+        </div>
+        <div id="Conclusion" class="hidden">
+            <p>"Big Data" has become a trendy buzzword, and there certainly are advances that are seeping into the the Economic 
+                field. Companies like Premise and MIT's Billion Prices database are looking to collect granular pricing 
+                information. <a href="http://www.citytheorist.com/2014/05/a-few-thoughts-on-satellite-sourced.html">Satellite 
+                Imagery</a> can be used to gain geographic granularity, and in analyzing the nature of economic growth. </p>
+            <p>Econometrics, however, has been around for a while. Macroeconomic concepts have been worked out and clearly defined
+                over the years. Sector divisions have been standardized, and surveying techniques have been perfected by offices of
+                national statistics to fine tune the aggregate picture of the economy they draw.</p>
+            <p>The advances being made today are very real, and can allow us to have ever more clearer pictures of the economy. 
+                Big data techniques work from the ground-up, and can give us a level of detail top-down macroeconomic measures 
+                can't match. These ground-up advances need to be harmonized with the existing measures however or else we end up
+                with two pictures of different underlying truths.</p>
+            <img src="http://hnonline.sk/sites/default/files/thumbnails/video/201410/i_2489_architecture-fail2-003.jpg">
+            <p></p>
+        </div>
 
         <script src="together.js"></script>
+        <br><br><br><br><br>
     </body>
 </html>

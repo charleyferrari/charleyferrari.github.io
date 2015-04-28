@@ -68,6 +68,10 @@ function cvsmap(econ, conceptMap){
 }
 var globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
 
+d3.select("#EconDescription")
+  .append("p")
+  .text("Choose the economic concept you wish to visualize below: ");
+
 d3.select("#EconDropDown").append("select");
 
 d3.select("#EconDropDown select")
@@ -85,7 +89,17 @@ d3.select("#EconDropDown select")
 var econChange = function(){
   globalEconConcept = d3.event.target.value;
   globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
+
+  if(d3.select("#EconDescription2 p").empty()){
+    d3.select("#EconDescription2")
+      .append("p")
+      .text("The below data is sourced from the UK Office of National Statistics.");
+  }
+
   drawEconGraph();
+
+  d3.select("#EconDescription3")
+    .classed("hidden", false);
 
   if(d3.select("#CurrentOrFutureDropDown select").empty()){
     d3.select("#CurrentOrFutureDropDown").append("select");
@@ -105,6 +119,9 @@ var econChange = function(){
     if(!d3.select("#CVSHist svg g").empty()){
       drawCVSHist();
     }
+
+    d3.select("#MeanCVSDescription")
+      .classed("hidden", false);
   
     if(d3.select("#DateDropDown select").empty()){
       d3.select("#DateDropDown").append("select");
@@ -121,6 +138,12 @@ var econChange = function(){
     var dateChange = function(){
       globalDate = d3.event.target.value;
       drawCVSHist();
+
+      d3.select("#CVSHistDescription")
+        .classed("hidden", false);
+
+      d3.select("#Conclusion")
+        .classed("hidden", false);
 
       if(d3.select("#SectorDropDown select").empty()){
         d3.select("#SectorDropDown").append("select");  
@@ -162,7 +185,7 @@ d3.select("#EconDropDown select")
 
 function drawEconGraph(){
 
-  d3.csv("econdata.csv", function(error, data){
+  d3.csv("econdata.csv", function(error, data){ 
 
       function econData(concept) {
 
