@@ -88,7 +88,7 @@ d3.select("#EconDropDown select")
   .text(function(d) { return d.econTitle; } )
   .attr("value", function(d) { return d.econ; } );
 
-d3.select("#EconDropDown")
+d3.select("#EconDropDown select")
   .insert("option",":first-child")
   .text("")
   .attr("");
