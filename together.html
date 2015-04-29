@@ -21,6 +21,7 @@
         </style>
         <script src="d3/d3.min.js"></script>
         <script src="d3/nv.d3.min.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     </head>
     <body>
 
@@ -30,7 +31,33 @@
             <option value="test3">test3</option>
         </select> -->
 
-        <div id="EconDescription"></div>
+        <h1>Visualizing Company Visit Scores From the Bank of England</h1>
+        <div id="Introduction">
+            <p>Economic data is commonly expressed in aggregate. Consumption and investment behaviors are summed up as Gross 
+                Domestic Product, prices of a basket of goods are analyzed to provide an aggregate Consumer Price Index, and 
+                Unemployment and tax records are analyzed to provide unemployment rates. Economic concepts are broken out by
+                industry, geography, or other criteria, but economic classifications are still presented in a "top-down" 
+                fashion.</p>
+            <p>Huge strides have been made in the field of data analysis. Techniques for dealing with large data sets have 
+                emerged, and "big data" has become a trendy buzzword. Fields which previously relied on intuition are being
+                revolutionized by this new availability of meaningful data.</p>
+            <p>Economics is a mature field. Econometrics is essentially what data science was before the term data science
+                existed. The theory behind the aggregation of the economy is well developed, and these numbers have been 
+                accepted by the business and academic community. New data sources are available, but markets still move on
+                official data releases.</p>
+            <p>New advances are being made in collecting economic data. Companies like <a href="http://www.premise.com/">
+                Premise</a> are working to aggregate price level data from the ground up in developing countries, while
+                MIT's <a href="http://bpp.mit.edu/">Billion Prices Project</a> is collecting this same data by scraping the
+                web.</p>
+            <p>These still remain two separate worlds however. Economic data was aggregated in the first place because the 
+                sort of data collection we have today never existed, and was always meant to be an approximation of the 
+                behaviour of the economy.</p>
+            <p>Change needs to occur on both sides of the divide, and the Bank of England's release of granular survey data 
+                can illustrate how this can be bridged. I created this visualization to help move back and forth intelligently
+                between detailed survey data and broad economic concepts, and I hope this can be used to inspire more 
+                collaborative innovation between these two fields.</p>
+            <p>Start by choosing an economic concept below you'd like to visualize.</p>
+        </div>
 
         <div id="EconDropDown">
             <!-- <select></select> -->
@@ -107,9 +134,6 @@
         <div id="SectorDropDown">
             <!-- <select></select> -->
         </div>
-        <div id="CVSHist">
-            <svg style='height:600px'/>
-        </div>
         <div id="CVSHistDescription" class="hidden">
             <p>In these histograms, you can see how the distribution of company visit scores change over time. In a lot of cases,
                 one can visualize a near normal distribution moving back and forth depending on what its mean score is. Many
@@ -122,20 +146,44 @@
                 example, if demographic and geographic data were added to these scores for example, one could filter by the 
                 gender of the proprietor to see if women are more successful business owners in certain regions.</p>
         </div>
-        <div id="Conclusion" class="hidden">
-            <p>"Big Data" has become a trendy buzzword, and there certainly are advances that are seeping into the the Economic 
-                field. Companies like Premise and MIT's Billion Prices database are looking to collect granular pricing 
-                information. <a href="http://www.citytheorist.com/2014/05/a-few-thoughts-on-satellite-sourced.html">Satellite 
-                Imagery</a> can be used to gain geographic granularity, and in analyzing the nature of economic growth. </p>
-            <p>Econometrics, however, has been around for a while. Macroeconomic concepts have been worked out and clearly defined
-                over the years. Sector divisions have been standardized, and surveying techniques have been perfected by offices of
-                national statistics to fine tune the aggregate picture of the economy they draw.</p>
-            <p>The advances being made today are very real, and can allow us to have ever more clearer pictures of the economy. 
-                Big data techniques work from the ground-up, and can give us a level of detail top-down macroeconomic measures 
-                can't match. These ground-up advances need to be harmonized with the existing measures however or else we end up
-                with two pictures of different underlying truths.</p>
-            <img src="http://hnonline.sk/sites/default/files/thumbnails/video/201410/i_2489_architecture-fail2-003.jpg">
-            <p></p>
+        <div id="CVSHist">
+            <svg style='height:600px'/>
+        </div>
+        <div id="Concept2Description" class="hidden">
+            <p>Having the granular scores allow us to answer questions that could never be answered with top-down data. Dividing 
+                economic data into industries isn't the same as manipulating the underlying data. Once you're able to do that, 
+                you can answer more sophisticated questions.</p>
+            <p>Here for example, one can compare concepts on a firm by firm basis. This is beyond using one economic indicator to
+                predict another in an economic model. Here, one can actually see what happens to a firm with a certain 
+                characteristic.</p>
+            <p>Choose a second concept from the drop down menu below to view a scatter plot across two types of Company Visit 
+                Scores.</p>
+        </div>
+        <div id="Concept2DropDown"></div>
+        <div id="GoogleChart" class="hidden" style="width: 1200px; height: 600px;">
+        </div>
+        <div id="Concept2Description2" class="hidden">
+            <p>This graph shows a motion plot of two types of company visit scores. The original concept is on the x-axis and 
+                the new concept is on the Y-axis.</p> 
+            <p>The raw data is filtered by the original concept's score (from -5 to 5). For each of these groups, the average 
+                of the second score is taken. This graph is animated by time, and the size of the circles correspond to the number 
+                of companies with the corresponding original score.</p>
+            <p>Granular data can be used to answer questions about individual actors in the economy in a way that even the most 
+                precisely industry breakdown won't be able to. While this visualization can serve as a model, there is still a lot 
+                more work to be done.</p>
+            <p>I believe economic concepts should be rethought in the age of big data. Economic aggregations as they currently 
+                exist can trace their pedigree back to John Maynard Keynes' work following the Great Depression, and even further 
+                back to the founders of the field. These mental frameworks existed because people needed a way to express what was 
+                happening in an economy with imperfect information. While our information is far from perfect, we're closer than 
+                ever to being able to form a complete picture of the economy from the ground up. How important is GDP when the 
+                data behind every consumer purchase and investment is available electronically? How important are baskets of goods 
+                when the price of everything can be researched online?</p>
+            <p>Despite this, the economic work done by our predecessors cannot be forgotten. We've only had this enhanced view of 
+                our economy for a handful of years. It's extremely useful to perform deep historical dives in order to get a long 
+                enough view of the dynamics of human economies. Just as economic data needs to be atomized, the granular data 
+                being created needs to be scrutinized, and added to a common framework that includes what we have historically.<p>
+            <p>It's in this way I hope the best of both worlds can be achieved, and we can combine the wisdom of our predecessors 
+                with today's technological advances.</p>
         </div>
 
         <script src="together.js"></script>

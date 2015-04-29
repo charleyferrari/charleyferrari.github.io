@@ -67,12 +67,21 @@ function cvsmap(econ, conceptMap){
   return cvs;
 }
 var globalCVSConcept = cvsmap(globalEconConcept, conceptMap);
+var globalCVSConcept2 = "EmploymentScore";
 
-d3.select("#EconDescription")
-  .append("p")
-  .text("Choose the economic concept you wish to visualize below: ");
+var googleRawData = {};
 
-d3.select("#EconDropDown").append("select");
+dateList.forEach(function(d){
+  googleRawData[d] = {
+    surveyCount: [0,0,0,0,0,0,0,0,0,0,0],
+    meanTally: [0,0,0,0,0,0,0,0,0,0,0]
+  };
+});
+
+d3.select("#EconDropDown").append("select")
+  .append("option")
+  .text("")
+  .attr("");
 
 d3.select("#EconDropDown select")
   .selectAll("option")
@@ -97,13 +106,14 @@ var econChange = function(){
   }
 
   drawEconGraph();
-
   if(!d3.select("#CVSChart svg g").empty()){
     drawMeanCVSGraph();
   }
   if(!d3.select("#CVSHist svg g").empty()){
     drawCVSHist();
   }
+
+  drawGoogleChart();
 
   d3.select("#EconDescription3")
     .classed("hidden", false);
@@ -149,9 +159,6 @@ var econChange = function(){
       d3.select("#CVSHistDescription")
         .classed("hidden", false);
 
-      d3.select("#Conclusion")
-        .classed("hidden", false);
-
       if(d3.select("#SectorDropDown select").empty()){
         d3.select("#SectorDropDown").append("select");  
       }
@@ -168,14 +175,82 @@ var econChange = function(){
         globalSector = d3.event.target.value;
         drawMeanCVSGraph();
         drawCVSHist();
+        drawGoogleChart();
+
+        if(d3.select("#Concept2DropDown select").empty()){
+          d3.select("#Concept2DropDown").append("select");
+        }
+
+        d3.select("#Concept2DropDown select")
+          .selectAll("option")
+          .data(conceptMap)
+          .enter()
+          .append("option")
+          .text(function(d) { return d.econTitle; } )
+          .attr("value", function(d) { return d.score; } );
+
+        d3.select("#Concept2Description")
+          .classed("hidden", false);
+
+        var concept2Change = function(){
+          globalCVSConcept2 = d3.event.target.value;
+          drawGoogleChart();
+          d3.select("#GoogleChart")
+            .classed("hidden", false);
+          d3.select("#Concept2Description2")
+            .classed("hidden", false);
+          // d3.select("#Conclusion")
+          //   .classed("hidden", false);
+        };
+
+        d3.select("#Concept2DropDown select")
+          .on("change", concept2Change);
       };
 
       d3.select("#SectorDropDown select")
         .on("change", sectorChange);
     };
 
+    var sectorChangePrime = function(){
+      // globalSector = d3.event.target.value;
+      drawMeanCVSGraph();
+      drawCVSHist();
+      drawGoogleChart();
+
+      if(d3.select("#Concept2DropDown select").empty()){
+        d3.select("#Concept2DropDown").append("select");
+      }
+
+      d3.select("#Concept2DropDown select")
+        .selectAll("option")
+        .data(conceptMap)
+        .enter()
+        .append("option")
+        .text(function(d) { return d.econTitle; } )
+        .attr("value", function(d) { return d.score; } );
+
+      d3.select("#Concept2Description")
+        .classed("hidden", false);
+
+      var concept2ChangePrime = function(){
+        globalCVSConcept2 = d3.event.target.value;
+        drawGoogleChart();
+        d3.select("#GoogleChart")
+          .classed("hidden", false);
+        d3.select("#Concept2Description2")
+          .classed("hidden", false);
+        // d3.select("#Conclusion")
+        //   .classed("hidden", false);
+      };
+
+      d3.select("#Concept2DropDown select")
+        .on("change", concept2ChangePrime);
+    };
+
     d3.select("#DateDropDown select")
-      .on("change", dateChange);
+      .on("change", function(){
+        dateChange(); sectorChangePrime();
+      });
   };
 
   d3.select("#CurrentOrFutureDropDown select")
@@ -379,5 +454,84 @@ function drawCVSHist(){
     });
 
   });
+
+}
+
+  /////////////////////////////////////////////////////////////////////////
+
+google.load("visualization", "1", {packages:["motionchart"]});
+google.setOnLoadCallback(drawGoogleChart);
+function drawGoogleChart() {
+  googleRawData = {};
+
+  dateList.forEach(function(d){
+  googleRawData[d] = {
+      surveyCount: [0,0,0,0,0,0,0,0,0,0,0],
+      meanTally: [0,0,0,0,0,0,0,0,0,0,0]
+    };
+  });
+  
+  d3.csv("agents.csv", function(error, data){
+    function googleSurveyData(sector, currentOrFuture, concept1, concept2){
+
+      function increment(item){
+        var concept1Score = +item[concept1];
+        var concept2Score = +item[concept2];
+        var currentMean = googleRawData[item.ActualDateDisplay].meanTally[concept1Score+5];
+        var currentCount = googleRawData[item.ActualDateDisplay].surveyCount[concept1Score+5];
+
+        if(currentCount === 0){
+          googleRawData[item.ActualDateDisplay].meanTally[+item[concept1]+5] = concept2Score;
+          googleRawData[item.ActualDateDisplay].surveyCount[+item[concept1]+5] += 1;
+        } else{
+          googleRawData[item.ActualDateDisplay].meanTally[+item[concept1]+5] = 
+            (currentMean * currentCount + concept2Score) / (currentCount + 1);
+            googleRawData[item.ActualDateDisplay].surveyCount[+item[concept1]+5] += 1;
+        }
+
+        
+      }
+      
+      data.forEach(function(d){
+        if(sector == "Total"){
+          if(d.ScoreType == currentOrFuture){
+            increment(d);
+          }
+        } else{
+          if(d.ScoreType == currentOrFuture && d.Sector == sector){
+            increment(d);
+          }
+        }
+
+      });
+
+    }
+
+    googleSurveyData(globalSector, globalCurrentOrFuture, globalCVSConcept, globalCVSConcept2);
+
+    var dataForGoogle = [];
+
+    var parseDate = d3.time.format("%m/%d/%Y").parse;
+
+    dateList.forEach(function(d){
+      for(var i=0; i<googleRawData[d].surveyCount.length; i++){
+        dataForGoogle.push([
+          String(i-5), parseDate(d), i-5,  googleRawData[d].meanTally[i], "Color", googleRawData[d].surveyCount[i]
+        ]);
+      }
+    });
+
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', globalCVSConcept);
+    chartData.addColumn('date', 'Date');
+    chartData.addColumn('number', globalCVSConcept);
+    chartData.addColumn('number', globalCVSConcept2);
+    chartData.addColumn('string', 'ColorPlaceHolder');
+    chartData.addColumn('number', 'SurveyCount');
+    chartData.addRows(dataForGoogle);
+    var chart = new google.visualization.MotionChart(document.getElementById('GoogleChart'));
+    chart.draw(chartData, {width: 1200, height:600});
+
+  });  
 
 }
