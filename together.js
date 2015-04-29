@@ -121,7 +121,7 @@ var econChange = function(){
     .classed("hidden", false);
 
   if(d3.select("#CurrentOrFutureDropDown select").empty()){
-    d3.select("#CurrentOrFutureDropDown").append("select"_);
+    d3.select("#CurrentOrFutureDropDown").append("select");
 
     d3.select("#CurrentOrFutureDropDown select")
       .selectAll("option")
@@ -244,8 +244,7 @@ var econChange = function(){
       drawGoogleChart();
 
       if(d3.select("#Concept2DropDown select").empty()){
-        d3.select("#Concept2DropDown")
-          .append("select")
+        d3.select("#Concept2DropDown").append("select");
 
         d3.select("#Concept2DropDown select")
           .selectAll("option")
