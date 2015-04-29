@@ -78,10 +78,7 @@ dateList.forEach(function(d){
   };
 });
 
-d3.select("#EconDropDown").append("select")
-  .append("option")
-  .text("")
-  .attr("");
+d3.select("#EconDropDown").append("select");
 
 d3.select("#EconDropDown select")
   .selectAll("option")
@@ -90,6 +87,11 @@ d3.select("#EconDropDown select")
   .append("option")
   .text(function(d) { return d.econTitle; } )
   .attr("value", function(d) { return d.econ; } );
+
+d3.select("#EconDropDown").append("select")
+  .insert("option",":first-child")
+  .text("")
+  .attr("");
 
 // d3.select("#EconDropDown select")
 //   .on("change", function(){
