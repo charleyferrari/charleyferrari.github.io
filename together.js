@@ -123,6 +123,11 @@ var econChange = function(){
   }
 
   d3.select("#CurrentOrFutureDropDown select")
+    .append("option")
+    .text("")
+    .attr("value", "");
+
+  d3.select("#CurrentOrFutureDropDown select")
     .selectAll("option")
     .data(["Current", "Future"])
     .enter()
@@ -145,6 +150,11 @@ var econChange = function(){
     }
     
     d3.select("#DateDropDown select")
+      .append("option")
+      .text("")
+      .attr("value", "");
+
+    d3.select("#DateDropDown select")
       .selectAll("option")
       .data(dateList)
       .enter()
@@ -164,6 +174,11 @@ var econChange = function(){
       }
 
       d3.select("#SectorDropDown select")
+        .append("option")
+        .text("")
+        .attr("value", "");
+
+      d3.select("#SectorDropDown select")
         .selectAll("option")
         .data(sectorList)
         .enter()
@@ -180,6 +195,11 @@ var econChange = function(){
         if(d3.select("#Concept2DropDown select").empty()){
           d3.select("#Concept2DropDown").append("select");
         }
+
+        d3.select("#Concept2DropDown select")
+          .append("option")
+          .text("")
+          .attr("value", "");
 
         d3.select("#Concept2DropDown select")
           .selectAll("option")
@@ -220,6 +240,11 @@ var econChange = function(){
       if(d3.select("#Concept2DropDown select").empty()){
         d3.select("#Concept2DropDown").append("select");
       }
+
+      d3.select("#Concept2DropDown select")
+        .append("option")
+        .text("")
+        .attr("value", "");
 
       d3.select("#Concept2DropDown select")
         .selectAll("option")
