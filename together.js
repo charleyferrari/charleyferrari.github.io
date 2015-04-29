@@ -98,6 +98,13 @@ var econChange = function(){
 
   drawEconGraph();
 
+  if(!d3.select("#CVSChart svg g").empty()){
+    drawMeanCVSGraph();
+  }
+  if(!d3.select("#CVSHist svg g").empty()){
+    drawCVSHist();
+  }
+
   d3.select("#EconDescription3")
     .classed("hidden", false);
 
