@@ -121,20 +121,21 @@ var econChange = function(){
     .classed("hidden", false);
 
   if(d3.select("#CurrentOrFutureDropDown select").empty()){
-    d3.select("#CurrentOrFutureDropDown")
-      .append("select")
-      .append("option")
-      .text("")
-      .attr("value", "");;
-  }
+    d3.select("#CurrentOrFutureDropDown").append("select"_);
 
-  d3.select("#CurrentOrFutureDropDown select")
-    .selectAll("option")
-    .data(["Current", "Future"])
-    .enter()
-    .append("option")
-    .text(function(d) { return d; } )
-    .attr("value", function(d) { return d; } );
+    d3.select("#CurrentOrFutureDropDown select")
+      .selectAll("option")
+      .data(["Current", "Future"])
+      .enter()
+      .append("option")
+      .text(function(d) { return d; } )
+      .attr("value", function(d) { return d; } );
+
+    d3.select("#CurrentOrFutureDropDown select")
+      .insert("option", ":first-child")
+      .text("")
+      .attr("value", "");
+  }
 
   var currentOrFutureChange = function(){
     globalCurrentOrFuture = d3.event.target.value;
@@ -147,20 +148,21 @@ var econChange = function(){
       .classed("hidden", false);
   
     if(d3.select("#DateDropDown select").empty()){
-      d3.select("#DateDropDown")
-        .append("select")
+      d3.select("#DateDropDown").append("select");
+      
+      d3.select("#DateDropDown select")
+        .selectAll("option")
+        .data(dateList)
+        .enter()
         .append("option")
+        .text(function(d) { return d; } )
+        .attr("value", function(d) { return d; } );
+
+      d3.select("#DateDropDown select")
+        .insert("option", ":first-child")
         .text("")
         .attr("value", "");
-    }      
-
-    d3.select("#DateDropDown select")
-      .selectAll("option")
-      .data(dateList)
-      .enter()
-      .append("option")
-      .text(function(d) { return d; } )
-      .attr("value", function(d) { return d; } );
+    }
 
     var dateChange = function(){
       globalDate = d3.event.target.value;
@@ -170,20 +172,23 @@ var econChange = function(){
         .classed("hidden", false);
 
       if(d3.select("#SectorDropDown select").empty()){
-        d3.select("#SectorDropDown")
-          .append("select")
+        d3.select("#SectorDropDown").append("select");
+
+        d3.select("#SectorDropDown select")
+          .selectAll("option")
+          .data(sectorList)
+          .enter()
           .append("option")
+          .text(function(d) { return d; } )
+          .attr("value", function(d) { return d; } );
+
+        d3.select("#SectorDropDown select")
+          .insert("option", ":first-child")
           .text("")
           .attr("value", "");  
       }
 
-      d3.select("#SectorDropDown select")
-        .selectAll("option")
-        .data(sectorList)
-        .enter()
-        .append("option")
-        .text(function(d) { return d; } )
-        .attr("value", function(d) { return d; } );
+
 
       var sectorChange = function(){
         globalSector = d3.event.target.value;
@@ -192,20 +197,23 @@ var econChange = function(){
         drawGoogleChart();
 
         if(d3.select("#Concept2DropDown select").empty()){
-          d3.select("#Concept2DropDown")
-            .append("select")
+          d3.select("#Concept2DropDown").append("select");
+
+          d3.select("#Concept2DropDown select")
+            .selectAll("option")
+            .data(conceptMap)
+            .enter()
             .append("option")
+            .text(function(d) { return d.econTitle; } )
+            .attr("value", function(d) { return d.score; } );
+
+          d3.select("#Concept2DropDown select")          
+            .insert("option", ":first-child")
             .text("")
             .attr("value", "");
         }
 
-        d3.select("#Concept2DropDown select")
-          .selectAll("option")
-          .data(conceptMap)
-          .enter()
-          .append("option")
-          .text(function(d) { return d.econTitle; } )
-          .attr("value", function(d) { return d.score; } );
+
 
         d3.select("#Concept2Description")
           .classed("hidden", false);
@@ -238,18 +246,22 @@ var econChange = function(){
       if(d3.select("#Concept2DropDown select").empty()){
         d3.select("#Concept2DropDown")
           .append("select")
+
+        d3.select("#Concept2DropDown select")
+          .selectAll("option")
+          .data(conceptMap)
+          .enter()
           .append("option")
+          .text(function(d) { return d.econTitle; } )
+          .attr("value", function(d) { return d.score; } );
+
+        d3.select("#Concept2DropDown select")
+          .insert("option", ":first-child")
           .text("")
           .attr("value", "");
       }
 
-      d3.select("#Concept2DropDown select")
-        .selectAll("option")
-        .data(conceptMap)
-        .enter()
-        .append("option")
-        .text(function(d) { return d.econTitle; } )
-        .attr("value", function(d) { return d.score; } );
+
 
       d3.select("#Concept2Description")
         .classed("hidden", false);
