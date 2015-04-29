@@ -119,13 +119,12 @@ var econChange = function(){
     .classed("hidden", false);
 
   if(d3.select("#CurrentOrFutureDropDown select").empty()){
-    d3.select("#CurrentOrFutureDropDown").append("select");
+    d3.select("#CurrentOrFutureDropDown")
+      .append("select")
+      .append("option")
+      .text("")
+      .attr("value", "");;
   }
-
-  d3.select("#CurrentOrFutureDropDown select")
-    .append("option")
-    .text("")
-    .attr("value", "");
 
   d3.select("#CurrentOrFutureDropDown select")
     .selectAll("option")
@@ -146,13 +145,12 @@ var econChange = function(){
       .classed("hidden", false);
   
     if(d3.select("#DateDropDown select").empty()){
-      d3.select("#DateDropDown").append("select");
-    }
-    
-    d3.select("#DateDropDown select")
-      .append("option")
-      .text("")
-      .attr("value", "");
+      d3.select("#DateDropDown")
+        .append("select")
+        .append("option")
+        .text("")
+        .attr("value", "");
+    }      
 
     d3.select("#DateDropDown select")
       .selectAll("option")
@@ -170,13 +168,12 @@ var econChange = function(){
         .classed("hidden", false);
 
       if(d3.select("#SectorDropDown select").empty()){
-        d3.select("#SectorDropDown").append("select");  
+        d3.select("#SectorDropDown")
+          .append("select")
+          .append("option")
+          .text("")
+          .attr("value", "");  
       }
-
-      d3.select("#SectorDropDown select")
-        .append("option")
-        .text("")
-        .attr("value", "");
 
       d3.select("#SectorDropDown select")
         .selectAll("option")
@@ -193,13 +190,12 @@ var econChange = function(){
         drawGoogleChart();
 
         if(d3.select("#Concept2DropDown select").empty()){
-          d3.select("#Concept2DropDown").append("select");
+          d3.select("#Concept2DropDown")
+            .append("select")
+            .append("option")
+            .text("")
+            .attr("value", "");
         }
-
-        d3.select("#Concept2DropDown select")
-          .append("option")
-          .text("")
-          .attr("value", "");
 
         d3.select("#Concept2DropDown select")
           .selectAll("option")
@@ -238,13 +234,12 @@ var econChange = function(){
       drawGoogleChart();
 
       if(d3.select("#Concept2DropDown select").empty()){
-        d3.select("#Concept2DropDown").append("select");
+        d3.select("#Concept2DropDown")
+          .append("select")
+          .append("option")
+          .text("")
+          .attr("value", "");
       }
-
-      d3.select("#Concept2DropDown select")
-        .append("option")
-        .text("")
-        .attr("value", "");
 
       d3.select("#Concept2DropDown select")
         .selectAll("option")
