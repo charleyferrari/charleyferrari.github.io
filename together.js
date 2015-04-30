@@ -332,7 +332,7 @@ function drawEconGraph(){
               .tickFormat(function(d) { return d3.time.format("%b %Y")(new Date(d)); });
 
           chart.yAxis
-              .axisLabel("Average Company Visit Score")
+              .axisLabel("Percent Change YoY")
               .tickFormat(d3.format(".02f"))
               ;
 
