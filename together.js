@@ -559,7 +559,7 @@ function drawGoogleChart() {
     chartData.addColumn('date', 'Date');
     chartData.addColumn('number', globalCVSConcept);
     chartData.addColumn('number', globalCVSConcept2);
-    chartData.addColumn('string', 'ColorPlaceHolder');
+    chartData.addColumn('string', 'Blue');
     chartData.addColumn('number', 'SurveyCount');
     chartData.addRows(dataForGoogle);
     var chart = new google.visualization.MotionChart(document.getElementById('GoogleChart'));
