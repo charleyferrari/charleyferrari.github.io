@@ -476,7 +476,7 @@ function drawCVSHist(){
             ;
 
         chart.yAxis
-          .axisLabel("Number of Company Visits")
+          .axisLabel("Number of Companies")
           .tickFormat(function(d){ return Math.round(d); });  
 
         d3.select("#CVSHist svg")
