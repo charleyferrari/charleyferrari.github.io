@@ -1,3 +1,16 @@
+///////////////////////////////////////////////
+// OH GOD YOU NEED TO RELATE CURRENT OR FUTURE TO THE GOOGLE CHARTNO NO NO
+///////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// The concept map dictionary allows me to relate economic concepts
+// to their score types. Econ values is the economic concept code, econTitle
+// is a longer representation, and the score is the score code
+///////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// R code was used to create these CSVs
+///////////////////////////////////////////////
 
 var conceptMap = [
         {
@@ -42,6 +55,41 @@ var conceptMap = [
           score: "PreTaxProfitsScore"
         }
         ];
+
+///////////////////////////////////////////////
+// The variables that the user can choose between are defined
+// globally, because they can apply to multiple graphs. The user will have the choice
+// of choosing the following, in order: 
+///////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// EconConcept: one out of Value Add, Exports, Business Investment, Total Employment, 
+// Average Weekly Earnings: Total, Average Weekly Earnings: Regular Pay, Gross Operating Surplus
+
+// CurrentOrFuture: Whether or not to use the current or future scores
+
+// Sector: one out of "Total", "Business and financial services", 
+// D"istribution, hotels, catering, arts, entertainment, recreation and other services", 
+// "Production", and "Transport, storage, and communications"
+
+// Date: Quarterly dates from 2008Q1 to 2012Q4
+
+// CVSConcept: the corresponding score type that maps to the econ concept, according to
+// the concept map above.
+
+// CVSConcept2: A second score type, to be shown in a google motion chart along with the
+// first score type.
+///////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// These all have default values, but the action of choosing a value will draw the graph
+// in MOST cases. The only exception is the motion chart, which had to be kept hidden.
+// The effect is the same however, as the user will have to choose a second score type in 
+// order to remove the hidden attribute from its div. From the user's perspective, he or she
+// is drawing the graph by choosing a concept.
+///////////////////////////////////////////////
+
+
 var globalCurrentOrFuture = "Current";
 var globalEconConcept = "ValueAdd";
 var globalSector = "Total";
@@ -77,6 +125,51 @@ dateList.forEach(function(d){
     meanTally: [0,0,0,0,0,0,0,0,0,0,0]
   };
 });
+
+///////////////////////////////////////////////
+// Here's a brief description of the four graphs:
+
+// EconChart: A line graph of the economic concept as defined in globalEconConcept
+
+// CVSChart: A line graph of the score type as defined in globalCVSConcept, which is mapped
+// from the conceptMap filtered by a sector, defined by globalSector. 
+// The score is either current or future, chosen by the user and defined by globalCurrentOrFuture
+// When first drawn, the sector is total by default. Once the sector drop down is created, 
+// the graph will redraw as globalSector is changed.
+
+// CVSHist: A histogram of:
+// --the distribution of scores of a certain score type, defined by globalCVSConcept
+// --At a particular date, as defined by globalDate
+// --In a sector, defined by globalSector (total is the aggregate of the other four sectors)
+// --Current or future scores, depending on globalCurrentOrFuture
+
+// GoogleChart: A motion chart comparing the distributions of two score types, defined by
+// globalCVSConcept and globalCVSConcept2. These are filtered by globalCurrentOrFuture, and globalSector
+///////////////////////////////////////////////
+
+///////////////////////////////////////////////
+// The functions that draw the graphs are nested, because the user is meant to gradually
+// draw out the four graphs. The drop downs affect the four graphs as follows:
+
+// EconDropDown affects the all four graphs, and sets the globalEconConcept
+// and globalCVSConcept through the CVS Map.
+
+// currentOrFutureDropDown affects the CVSChart, CVSHist, and google chart. If the chart is present,
+// it will force a redraw based on the current global variables. 
+
+// DateDropDown only affects CVSHist
+
+///////////////////////////////////////////////
+// OH GOD YOU NEED TO RELATE CURRENT OR FUTURE TO THE GOOGLE CHARTNO NO NO
+///////////////////////////////////////////////
+
+// SectorDropDown affects CVSHist and google chart. It will technically redraw the google chart whenever it's 
+// chosen, but if the google chart is hidden the user won't notice.
+
+// Concept2DropDown affects only the google chart. It will unhide the existing chart, and redraw it if it's being
+// changed.
+
+///////////////////////////////////////////////
 
 d3.select("#EconDropDown").append("select");
 
@@ -297,6 +390,11 @@ d3.select("#EconDropDown select")
 
 
 // function drawEconGraph(globalEconConcept, globalCurrentOrFuture, globalSector, globalDate){
+
+///////////////////////////////////////////////
+// Below are the three functions that actually draw the graphs. These are called above
+// in the nested functions that control the logic of the drop down menus.
+///////////////////////////////////////////////
 
 function drawEconGraph(){
 
