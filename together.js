@@ -233,6 +233,7 @@ var econChange = function(){
   var currentOrFutureChange = function(){
     globalCurrentOrFuture = d3.event.target.value;
     drawMeanCVSGraph();
+    drawGoogleChart();
     if(!d3.select("#CVSHist svg g").empty()){
       drawCVSHist();
     }
