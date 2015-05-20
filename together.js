@@ -159,15 +159,18 @@ dateList.forEach(function(d){
 
 // DateDropDown only affects CVSHist
 
-///////////////////////////////////////////////
-// OH GOD YOU NEED TO RELATE CURRENT OR FUTURE TO THE GOOGLE CHARTNO NO NO
-///////////////////////////////////////////////
-
 // SectorDropDown affects CVSHist and google chart. It will technically redraw the google chart whenever it's 
 // chosen, but if the google chart is hidden the user won't notice.
 
 // Concept2DropDown affects only the google chart. It will unhide the existing chart, and redraw it if it's being
 // changed.
+
+// The google chart is technically present even when the EconDropDown is chosen. Because of limits within 
+// google chart's functionality, I couldn't set a function to draw the chart from scratch. I was forced to have
+// the chart drawn once the page is first loaded, with a default second concept chosen. To get around this limitation,
+// I set the div as hidden initially. Once the second concept is chosen, the hidden tag is removed, and the graph
+// is redrawn with the second concept the user specified. From the user's perspective, he or she is drawing the graph 
+// from scratch.
 
 ///////////////////////////////////////////////
 
