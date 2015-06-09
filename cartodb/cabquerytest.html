@@ -71,8 +71,6 @@
         .addTo(map)
         .on('done', function(layer) {
 
-          alert(layer.getSubLayerCount());
-
           var cabSublayerOptions = {
             sql: "SELECT * FROM gtdelta00018",
             cartocss: "#gtdelta00018{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
