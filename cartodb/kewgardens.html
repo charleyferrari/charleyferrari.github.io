@@ -52,7 +52,7 @@
       // initiate leaflet map
       map = new L.Map('cartodb-map', { 
         center: [40.714560,-73.830522],
-        zoom: 14
+        zoom: 13
       })
 
       L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
@@ -72,7 +72,7 @@
         .on('done', function(layer) {
 
           var cabSublayerOptions = {
-            sql: "SELECT * FROM gtdelta00018 WHERE subwayid = 270",
+            sql: "SELECT * FROM gtdelta00018 WHERE subwayid = 272",
             cartocss: "#gtdelta00018{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
           }
 
