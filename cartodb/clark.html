@@ -1,0 +1,125 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style>
+    html, body {width:100%; height:100%; padding: 0; margin: 0;}
+    #cartodb-map { width: 100%; height:100%; background: black;}
+  </style>
+
+  <script type="infowindow/html" id="infowindow_cab_template">
+    <div class="cartodb-popup">
+      <a href="#close" class="cartodb-popup-close-button close">x</a>
+       <div class="cartodb-popup-content-wrapper">
+         <div class="cartodb-popup-header">
+           <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
+         </div>
+         <div class="cartodb-popup-content">
+           <!-- content.data contains the field info -->
+           <h4>Stop ID: </h4>
+           <p>{{content.data.subwayid}}</p>
+         </div>
+       </div>
+       <div class="cartodb-popup-tip-container"></div>
+    </div>
+  </script>
+
+  <script type="infowindow/html" id="infowindow_subway_template">
+    <div class="cartodb-popup">
+      <a href="#close" class="cartodb-popup-close-button close">x</a>
+       <div class="cartodb-popup-content-wrapper">
+         <div class="cartodb-popup-header">
+           <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
+         </div>
+         <div class="cartodb-popup-content">
+           <!-- content.data contains the field info -->
+           <h4>Stop Name: </h4>
+           <p>{{content.data.stopname}}</p>
+           <h4>Stop ID: </h4>
+           <p>{{content.data.stopid}}</p>
+         </div>
+       </div>
+       <div class="cartodb-popup-tip-container"></div>
+    </div>
+  </script>
+
+  <script>
+    var map;
+    function init(){
+      // initiate leaflet map
+      map = new L.Map('cartodb-map', { 
+        center: [40.696848,-73.993422],
+        zoom: 14
+      })
+
+      L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+      }).addTo(map);
+
+      var layerUrl = 'https://charleyferrari.cartodb.com/api/v2_1/viz/c6ad555e-0eec-11e5-89b2-0e0c41326911/viz.json';
+
+      // change the query for the first layer
+      // var subLayerOptions = {
+        // sql: "SELECT * FROM example_cartodbjs_1 where adm0_a3 = 'USA'",
+        // cartocss: "#example_cartodbjs_1{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
+      // }
+
+      cartodb.createLayer(map, layerUrl)
+        .addTo(map)
+        .on('done', function(layer) {
+
+          var cabSublayerOptions = {
+            sql: "SELECT * FROM gtdelta00018 WHERE subwayid = 72",
+            cartocss: "#gtdelta00018{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
+          }
+
+          var subwaySublayerOptions = {
+            sql: "SELECT * FROM subwaypoly"
+            // cartocss: "#subwaypoly{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
+          }
+
+          var cabSublayer = layer.getSubLayer(0);
+          var subwaySublayer = layer.getSubLayer(1);
+          cabSublayer.set(cabSublayerOptions);
+          subwaySublayer.set(subwaySublayerOptions);
+          cabSublayer.infowindow.set('template', $('#infowindow_cab_template').html());
+          subwaySublayer.infowindow.set('template', $('#infowindow_subway_template').html());
+
+          subwaySublayer.on('featureClick', function(e, latlng, pos, data){
+            // cabSublayer.setSQL("SELECT * FROM gtdelta00018 WHERE subwayid = " + String(data.stopid));
+            // alert("Hey! You clicked " + data.maxlon);
+
+            // subwaySublayer.setSQL("SELECT * FROM subwaypoly WHERE cartodb_id = " + data.cartodb_id);
+
+            // subwaySublayer.setSQL("SELECT * FROM subwaypoly WHERE cartodb_id = {{id}}", {id: data.cartodb_id});
+
+            // cabSublayer.setSQL("SELECT * FROM gtdelta00018 WHERE subwayid = (SELECT stopid FROM subwaypoly WHERE cartodb_id = {{id}})", {id: data.cartodb_id});
+
+            var sql = new cartodb.SQL({ user: 'charleyferrari' });
+
+            sql.execute("SELECT stopid FROM subwaypoly WHERE cartodb_id = " + data.cartodb_id)
+              .done(function(sid){
+                cabSublayer.setSQL("SELECT * FROM gtdelta00018 WHERE subwayid = " + sid.rows[0].stopid);
+              });
+
+            // sql.execute("SELECT * FROM subwaypoly WHERE cartodb_id = {{id}}", {id: data.cartodb_id}).done(function(data){console.log(data.rows);})
+
+            // SELECT * FROM gtdelta00018 WHERE subwayid = SELECT stopid FROM subwaypoly WHERE cartodb_id = 
+
+
+          });
+        }).on('error', function() {
+          console.log("some error occurred");
+          //log the error
+        });
+    }  
+  </script>
+</head>
+
+<body onload="init()">
+  <div id='cartodb-map'></div>
+</body>
+</html>
