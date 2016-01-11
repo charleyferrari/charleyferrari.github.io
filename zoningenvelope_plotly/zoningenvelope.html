@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="d3/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+
+  <body>
+    <script src="zoningenvelope.js"></script>
+    <div id="selection">
+      <p>This zoning envelope map shows the number of land plots that have the potential to be expanded.
+      Building heights are defined by FAR, or floor to area ratio. Assuming the building footprint uses the
+      full plot area, this is just the number of floors that can potentially be built above what currently
+      exists. By using the drop down menu below, you can choose to filter the map by number of available
+      floors. If you would like to only view buildings that can grow by more than 4 floors, choose 4.</p>
+      <select>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+    </div>
+    <div id="plot">
+      <iframe id="plotplot" width="640" height="640" frameborder="0" seamless="seamless" scrolling="no" src="https://plot.ly/~charleyferrari/24.embed?width=640&height=640" ></iframe>
+    </div>
+  </body>
+</html>
