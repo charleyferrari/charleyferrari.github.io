@@ -85,7 +85,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/charleyferrari/d3hpi/master/hps
             width: 480
         };
 
-        Plotly.newPlot('plotdiv', data, layout);
+        Plotly.newPlot('plotdiv', data, layout, {showLink: true});
     };
 
     var innerContainer = document.querySelector('[data-num="0"'),
@@ -109,7 +109,7 @@ Plotly.d3.csv('https://raw.githubusercontent.com/charleyferrari/d3hpi/master/hps
         var dataupdate = {
           y: [currentLowHPI, currentMiddleHPI, currentHighHPI]
         };
-        
+
         Plotly.restyle('plotdiv',dataupdate,[0,1,2]);
     }
 
