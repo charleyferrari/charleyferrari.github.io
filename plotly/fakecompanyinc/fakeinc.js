@@ -13,7 +13,7 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
       testlist.push(d.Industry);
     }
   });
-/*
+
   Plotly.d3.select('#dropdown select')
     .selectAll('option')
     .data(testlist)
