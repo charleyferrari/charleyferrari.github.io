@@ -14,13 +14,13 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
     }
   });
 
-  Plotly.d3.select('#dropdown select')
-    .selectAll('option')
+  Plotly.d3.select("#dropdown select")
+    .selectAll("option")
     .data(testlist)
     .enter()
-    .append('option')
+    .append("option")
     .text(function(d){ return d; })
-    .attr('value', function(d){ return d; });
+    .attr("value", function(d){ return d; });
 
   /*
   function unpack(rows, key){
