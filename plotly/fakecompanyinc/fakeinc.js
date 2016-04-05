@@ -105,9 +105,17 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
         });
       });
 
-      var dataupdate = {
-        y : [pricecount]
-      };
+      if(pricevolset == 'Price'){
+        var dataupdate = {
+          y : [pricecount]
+        };
+      }
+
+      if(pricevolset == 'Volume'){
+        var dataupdate = {
+          y : [volcount]
+        };
+      }
 
       Plotly.restyle('plot',dataupdate);
 
