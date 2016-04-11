@@ -129,7 +129,7 @@ sectorList.unshift('Total');
     .enter().append('option').text(function(d){ return d; });
   d3.select('#currentorfutureselect')
     .on('change', function(d){
-      globalCurrentOrFuture = d3.event.target.value;
+      globalCurrentorfuture = d3.event.target.value;
       rePlot();
     });
 
