@@ -4,27 +4,64 @@
 <script src="d3.min.js"></script>
 </head>
 <body>
-  <script src="fakeinc.js"></script>
-  <div id="dropdown"></div>
+  <script src="cvsviz.js"></script>
   <table>
     <tr>
       <td>
+        <div id="econdropdown">
+          Economic Concept: <select id="econselect"></select>
+        </div>
+        <div id="econdescription">
+          <p>The Bank of England performs a quarterly survey of the Business community across the UK. Included in these surveys
+              is a set of quantitative scores, ranging from a low of -5 to a high of 5, and across eleven concept categories.
+          </p>
+          <p>Seven of these categories have been mapped to traditional economic concepts coming from the Office of National Statistics:
+          </p>
+        </div>
         <div id="econgraph">
-          <iframe width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/237.embed"></iframe>
+          <iframe id="econframe" width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/300.embed"></iframe>
         </div>
       </td>
       <td>
+        <div id="currentorfuturedropdown">
+          Score Type: <select id="currentorfutureselect"></select>
+        </div>
+        <div id="currentorfuturedescription">
+          <p>These surveys ask for both the current conditions and perceived outlook for the future.
+          </p>
+        </div>
         <div id="meancvsgraph">
-          <iframe width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/239.embed"></iframe>
+          <iframe id="meancvsframe" width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/303.embed"></iframe>
         </div>
       </td>
     </tr>
     <tr>
       <td>
-        <iframe width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/241.embed"></iframe>
+        <div id="sectordropdown">
+          Sector: <select id="sectorselect"></select>
+        </div>
+        <div id="datedropdown">
+          Date: <select id="dateselect"></select>
+        </div>
+        <div id="histdescription">
+          <p>While classic economic statistics tell us how the economy is performing on aggregate, this gives
+            the ability to see distributions of scores across industries, at particular dates, and both current and
+            forward looking.</p>
+        </div>
+        <iframe id="histframe" width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/241.embed"></iframe>
       </td>
       <td>
-        <iframe width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/243.embed"></iframe>
+        <div id="secondscoredropdown">
+          Second Concept: <select id="secondscoreselect"></select>
+        </div>
+        <div id="secondscoredescription">
+          <p>Now that we have this granular information, we can explore deeper into the mechanics of the economy. We could
+            explore corellations in aggregate statistics, but this answers questions on a much deeper level about individual
+            firms.</p>
+          <p>The below bubble chart goes beyond looking at corellations for aggregate values, and tells us how the performance
+            of individual firms in one area can affect another.</p>
+        </div>
+        <iframe id="secondscoreframe" width="600" height="400" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/243.embed"></iframe>
       </td>
     </tr>
   </table>

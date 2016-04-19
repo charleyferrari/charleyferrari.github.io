@@ -91,7 +91,7 @@ sectorList.unshift('Total');
     Plot.postMessage({
       task : 'restyle',
       update : {
-        y : [barcount]
+        y : [barcount],
       }
     }, 'https://plot.ly');
 
