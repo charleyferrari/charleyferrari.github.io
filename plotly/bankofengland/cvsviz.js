@@ -38,10 +38,10 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
       d3.set(["foo", "bar", "foo", "baz"]).values()
 
       var dateList = d3.set(fulldateList).values();
-      var sectorList = d3.set(fullsectorList).values(); */
+      var sectorList = d3.set(fullsectorList).values(); 
 
       console.log(dateList);
-      console.log(sectorList);
+      console.log(sectorList);*/
 
       var conceptMap = [
               {
