@@ -38,7 +38,7 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
       d3.set(["foo", "bar", "foo", "baz"]).values()
 
       var dateList = d3.set(fulldateList).values();
-      var sectorList = d3.set(fullsectorList).values(); 
+      var sectorList = d3.set(fullsectorList).values();
 
       console.log(dateList);
       console.log(sectorList);*/
@@ -199,13 +199,13 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
         });
       };
 
-      var histPlot = function(){
+      var histPlot = function(){/*
 
-        var histplot = document.getElementById('histframe').contentWindow;
+        var histplot = document.getElementById('histframe').contentWindow;*/
 
         reBarcount();
 
-        /*console.log(barcount);*/
+        console.log(barcount); /*
 
         histplot.postMessage({
           task : 'restyle',
@@ -220,7 +220,7 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
             title : globalscoreTitle
           }
         }, 'https://plot.ly');
-
+*/
       };
 
       var secondscorePlot = function(){
@@ -255,14 +255,14 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
             globalScore = d.score;
           }
         });
-
+/*
         econPlot();
 
-        meanCVSPlot();
+        meanCVSPlot();*/
 
         histPlot();
-
-        secondscorePlot();
+/*
+        secondscorePlot();*/
 
       };
 
