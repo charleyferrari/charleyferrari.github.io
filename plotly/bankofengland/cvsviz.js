@@ -14,17 +14,9 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
           bubblesizecount = [0,0,0,0,0,0,0,0,0,0,0],
           meanbubblecounter = 0,
           globaleconTitle, globalscoreTitle,
-          dateList = ["Q1-2008", "Q2-2008", "Q3-2008", "Q4-2008",
-                      "Q1-2009", "Q2-2009", "Q3-2009", "Q4-2009",
-                      "Q1-2010", "Q2-2010", "Q3-2010", "Q4-2010",
-                      "Q1-2011", "Q2-2011", "Q3-2011", "Q4-2011",
-                      "Q1-2012", "Q2-2012", "Q3-2012", "Q4-2012",
-                      "Q1-2013", "Q2-2013", "Q3-2013", "Q4-2013"],
-          sectorList = ["Total", "Production",
-          "Distribution, hotels, catering, arts, entertainment, recreation and other services",
-          "Business and financial services", "Transport, storage and communications"];
+          dateList = [],
+          sectorList = ["Total"];
 
-      /*
       var fulldateList = [],
           fullsectorList = ['Total'];
 
@@ -35,11 +27,9 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
         fullsectorList.push(d.Sector);
       })
 
-      d3.set(["foo", "bar", "foo", "baz"]).values()
-
       var dateList = d3.set(fulldateList).values();
       var sectorList = d3.set(fullsectorList).values();
-
+/*
       console.log(dateList);
       console.log(sectorList);*/
 
@@ -261,7 +251,7 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
         meanCVSPlot();
 
         histPlot();
-        
+
         secondscorePlot();
 
       };
