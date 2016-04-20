@@ -13,33 +13,25 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
           meanbubblecount = [0,0,0,0,0,0,0,0,0,0,0],
           bubblesizecount = [0,0,0,0,0,0,0,0,0,0,0],
           meanbubblecounter = 0,
-          globaleconTitle, globalscoreTitle;
+          globaleconTitle, globalscoreTitle,
+          dateList = [],
+          sectorList = ['Total'];
 
-
-      Array.prototype.unique2 = function()
-      {
-      	var n = {},r=[];
-      	for(var i = 0; i < this.length; i++)
-      	{
-      		if (!n[this[i]])
-      		{
-      			n[this[i]] = true;
-      			r.push(this[i]);
-      		}
-      	}
-      	return r;
-      }
 
       var fulldateList = [],
           fullsectorList = ['Total'];
+
+
 
       agentsdata.forEach(function(d){
         fulldateList.push(d.ActualDateDisplay);
         fullsectorList.push(d.Sector);
       })
 
-      var dateList = fulldateList.unique2();
-      var sectorList = fullsectorList.unique2();
+      d3.set(["foo", "bar", "foo", "baz"]).values()
+
+      var dateList = d3.set(fulldateList).values();
+      var sectorList = d3.set(fullsectorList).values();
 
       console.log(dateList);
       console.log(sectorList);
