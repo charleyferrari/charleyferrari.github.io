@@ -1,6 +1,6 @@
-Plotly.d3.csv('agents.csv', function(err, agentsdata){
-  Plotly.d3.csv('meancvs.csv', function(err, meancvsdata){
-    Plotly.d3.csv('econdata.csv', function(err, econdata){
+Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/agents.csv', function(err, agentsdata){
+  Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/meancvs.csv', function(err, meancvsdata){
+    Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/econdata.csv', function(err, econdata){
 
       var conceptList = ['ValueAdd','Exports','BusinessInvestment','GrossOperatingSurplus','Employment','AWEReg','AWETot'],
           globalConcept = 'ValueAdd',
@@ -199,13 +199,13 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
         });
       };
 
-      var histPlot = function(){/*
+      var histPlot = function(){
 
-        var histplot = document.getElementById('histframe').contentWindow;*/
+        var histplot = document.getElementById('histframe').contentWindow;
 
         reBarcount();
 
-        console.log(barcount); /*
+        console.log(barcount);
 
         histplot.postMessage({
           task : 'restyle',
@@ -220,7 +220,7 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
             title : globalscoreTitle
           }
         }, 'https://plot.ly');
-*/
+
       };
 
       var secondscorePlot = function(){
@@ -255,14 +255,14 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
             globalScore = d.score;
           }
         });
-/*
+
         econPlot();
 
-        meanCVSPlot();*/
+        meanCVSPlot();
 
         histPlot();
-/*
-        secondscorePlot();*/
+        
+        secondscorePlot();
 
       };
 
