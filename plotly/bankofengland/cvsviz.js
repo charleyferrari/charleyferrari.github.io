@@ -214,14 +214,14 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
           update : {
             y : [barcount]
           }
-        }, 'https://plot.ly');
+        }, 'https://plot.ly'); */
 
         histplot.postMessage({
           task : 'relayout',
           update : {
             title : globalscoreTitle
           }
-        }, 'https://plot.ly'); */
+        }, 'https://plot.ly'); 
 
       };
 
