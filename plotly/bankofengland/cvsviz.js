@@ -256,19 +256,13 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
           }
         });
 
-        /*
-
         econPlot();
 
         meanCVSPlot();
 
-        */
-
         histPlot();
 
-        /*
-
-        secondscorePlot(); */
+        secondscorePlot();
 
       };
 
