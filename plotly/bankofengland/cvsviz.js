@@ -207,6 +207,8 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
 
         console.log(barcount);
 
+        /*
+
         histplot.postMessage({
           task : 'restyle',
           update : {
@@ -219,7 +221,7 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
           update : {
             title : globalscoreTitle
           }
-        }, 'https://plot.ly');
+        }, 'https://plot.ly'); */
 
       };
 
