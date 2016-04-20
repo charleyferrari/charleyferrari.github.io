@@ -180,7 +180,7 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
           meanbubblecount[concept1Score+5] = ((currentCount*currentMean)+concept2Score)/(currentCount+1);
           bubblesizecount[concept1Score+5]++;
 
-          console.log(bubblesizecount)
+          /*console.log(bubblesizecount)*/
 
         };
 
@@ -205,23 +205,21 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
 
         reBarcount();
 
-        console.log(barcount);
-
-        /*
+        /*console.log(barcount);*/
 
         histplot.postMessage({
           task : 'restyle',
           update : {
             y : [barcount]
           }
-        }, 'https://plot.ly'); */
+        }, 'https://plot.ly');
 
         histplot.postMessage({
           task : 'relayout',
           update : {
             title : globalscoreTitle
           }
-        }, 'https://plot.ly'); 
+        }, 'https://plot.ly');
 
       };
 
