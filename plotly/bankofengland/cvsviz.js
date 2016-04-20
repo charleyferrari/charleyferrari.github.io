@@ -262,11 +262,13 @@ Plotly.d3.csv('agents.csv', function(err, agentsdata){
 
         meanCVSPlot();
 
-        histPlot();
-
         */
 
-        secondscorePlot();
+        histPlot();
+
+        /*
+
+        secondscorePlot(); */
 
       };
 
