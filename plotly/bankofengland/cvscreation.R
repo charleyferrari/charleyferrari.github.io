@@ -2,6 +2,8 @@ setwd('/Users/Charley/Downloads/charleyferrari.github.io/plotly/bankofengland')
 
 agents <- read.csv('agents.csv')
 
+unique(agents$Sector)
+
 library(dplyr)
 
 meancvs <- agents %>%
