@@ -29,9 +29,6 @@
             <div id="econdropdown">
               Economic Concept: <select id="econselect" ></select>
             </div>
-              <p>The Bank of England performs a quarterly survey of the Business community across the UK. Included in these surveys
-              is a set of quantitative scores, ranging from a low of -5 to a high of 5, and across eleven concept categories.</p>
-              <p>Seven of these categories have been mapped to traditional economic concepts coming from the Office of National Statistics:</p>
           </div>
           <div class="chart-stage">
               <div id="econgraph">
@@ -50,20 +47,19 @@
             <div id="currentorfuturedropdown">
               Score Type: <select id="currentorfutureselect"></select>
             </div>
-            <p>These surveys ask for both the current conditions and perceived outlook for the future.</p>
           </div>
           <div class="chart-stage">
             <div id="meancvsgraph">
               <iframe id="meancvsframe" width="100%" height="480px" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/303.embed"></iframe>
             </div>
-          </div>  
+          </div>
           <div class="chart-notes">
             <p>You could put some notes here or just remove this whole div section.</p>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Second Row with two equal columns -->
     <div class="row">
       <!-- Begin Column One - columns classes must add up to twelve: https://getbootstrap.com/examples/grid/ -->
@@ -76,7 +72,6 @@
             <div id="datedropdown">
               Date: <select id="dateselect"></select>
             </div>
-              <p>While classic economic statistics tell us how the economy is performing on aggregate, this gives the ability to see distributions of scores across industries, at particular dates, and both current and forward looking.</p>
           </div>
           <div class="chart-stage">
               <div>
@@ -95,8 +90,6 @@
             <div id="secondscoredropdown">
               Second Concept: <select id="secondscoreselect"></select>
             </div>
-              <p>Now that we have this granular information, we can explore deeper into the mechanics of the economy. We could explore corellations in aggregate statistics, but this answers questions on a much deeper level about individual firms.</p>
-              <p>The below bubble chart goes beyond looking at corellations for aggregate values, and tells us how the performance of individual firms in one area can affect another.</p>
             </div>
           <div class="chart-stage">
             <iframe id="secondscoreframe" width="100%" height="480px" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/243.embed"></iframe>
@@ -107,13 +100,13 @@
         </div>
       </div>
     </div>
-    
+
     <hr>
     <!-- Footer Section -->
     <p class="small text-muted">
       &copy2016 Your Project Name.
     </p>
- 
+
   </div>
 
   <!-- Load Scripts -->
@@ -121,10 +114,10 @@
   <script src="./static/js/d3/d3.min.js"></script>
   <script src="./static/js/cvsviz.js"></script>
   <script src="./static/js/holderjs/holder.js"></script>
-    
+
   <script>
     Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
   </script>
-  
+
 </body>
 </html>
