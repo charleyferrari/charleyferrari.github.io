@@ -1,4 +1,4 @@
-Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/agents.csv', function(err, agentsdata){
+Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/agents2.csv', function(err, agentsdata){
   Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/meancvs.csv', function(err, meancvsdata){
     Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/plotly/bankofengland/econdata.csv', function(err, econdata){
 
@@ -64,21 +64,21 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
 
               {
                 econ: "AWETot",
-                econTitle: "Average Weekly Earnings: Total",
+                econTitle: "AWE: Total",
                 score: "TotalLabourCostsScore",
                 scoreTitle: "Total Labour Costs Score"
               },
 
               {
                 econ: "AWEReg",
-                econTitle: "Average Weekly Earnings: Regular Pay",
+                econTitle: "AWE: Regular Pay",
                 score: "PayScore",
                 scoreTitle: "Pay Score"
               },
 
               {
                 econ: "GrossOperatingSurplus",
-                econTitle: "Gross Operating Surplus",
+                econTitle: "Surplus",
                 score: "PreTaxProfitsScore",
                 scoreTitle: "Pre Tax Profits Score"
               }

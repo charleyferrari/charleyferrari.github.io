@@ -29,6 +29,8 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
 
       var dateList = d3.set(fulldateList).values();
       var sectorList = d3.set(fullsectorList).values();
+
+      console.log(sectorList);
 /*
       console.log(dateList);
       console.log(sectorList);*/
