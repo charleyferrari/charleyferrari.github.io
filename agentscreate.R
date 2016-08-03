@@ -1,6 +1,6 @@
 library(dplyr)
 
-setwd("C:/Users/Charley/Downloads/d3ghio")
+setwd("/Users/Charley/Downloads/charleyferrari.github.io")
 
 
 agentsraw <- read.csv("AgentsRaw.csv")

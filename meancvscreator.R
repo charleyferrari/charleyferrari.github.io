@@ -2,7 +2,7 @@ library(ggplot2)
 library(ggthemes)
 library(dplyr)
 
-setwd("E:/Downloads/Courses/CUNY/SPS/Git/IS 608 Knowledge and Visual Analytics/Semester Project/Together")
+setwd("/Users/Charley/Downloads/charleyferrari.github.io")
 
 agents <- read.csv("agents.csv")
 
