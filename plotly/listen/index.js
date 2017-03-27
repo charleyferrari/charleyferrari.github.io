@@ -2,11 +2,6 @@
 var plot = document.getElementById('plot').contentWindow;
 
 // send a message to the contentWindow
-plot.postMessage(
-    {
-        task: 'listen',
-        events: ['zoom','click','hover']
-    }, 'https://plot.ly');
 
 window.addEventListener('message', function(e) {
     var message = e.data;
