@@ -10,7 +10,7 @@ plot.postMessage(
 
 window.addEventListener('message', function(e) {
     var message = e.data;
-    alert(message.type);
+    //alert(message.type);
     console.log(message); // prints object for zoom, click, or hover event
 });
 
