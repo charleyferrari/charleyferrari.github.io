@@ -22,7 +22,7 @@
                                   font-family: Arial, Helvetica, sans-serif;}
             .hidden { display: none;}
         </style>
-        <script src="d3/d3.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="d3/nv.d3.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     </head>
@@ -36,28 +36,28 @@
 
         <h1>Visualizing Company Visit Scores From the Bank of England</h1>
         <div id="Introduction">
-            <p>Economic data is commonly expressed in aggregate. Consumption and investment behaviors are summed up as Gross 
-                Domestic Product, prices of a basket of goods are analyzed to provide an aggregate Consumer Price Index, and 
+            <p>Economic data is commonly expressed in aggregate. Consumption and investment behaviors are summed up as Gross
+                Domestic Product, prices of a basket of goods are analyzed to provide an aggregate Consumer Price Index, and
                 Unemployment and tax records are analyzed to provide unemployment rates. Economic concepts are broken out by
-                industry, geography, or other criteria, but economic classifications are still presented in a "top-down" 
+                industry, geography, or other criteria, but economic classifications are still presented in a "top-down"
                 fashion.</p>
-            <p>Huge strides have been made in the field of data analysis. Techniques for dealing with large data sets have 
+            <p>Huge strides have been made in the field of data analysis. Techniques for dealing with large data sets have
                 emerged, and "big data" has become a trendy buzzword. Fields which previously relied on intuition are being
                 revolutionized by this new availability of meaningful data.</p>
             <p>Economics is a mature field. Econometrics is essentially what data science was before the term data science
-                existed. The theory behind the aggregation of the economy is well developed, and these numbers have been 
+                existed. The theory behind the aggregation of the economy is well developed, and these numbers have been
                 accepted by the business and academic community. New data sources are available, but markets still move on
                 official data releases.</p>
             <p>New advances are being made in collecting economic data. Companies like <a href="http://www.premise.com/">
                 Premise</a> are working to aggregate price level data from the ground up in developing countries, while
                 MIT's <a href="http://bpp.mit.edu/">Billion Prices Project</a> is collecting this same data by scraping the
                 web.</p>
-            <p>These still remain two separate worlds however. Economic data was aggregated in the first place because the 
-                sort of data collection we have today never existed, and was always meant to be an approximation of the 
+            <p>These still remain two separate worlds however. Economic data was aggregated in the first place because the
+                sort of data collection we have today never existed, and was always meant to be an approximation of the
                 behaviour of the economy.</p>
-            <p>Change needs to occur on both sides of the divide, and the Bank of England's release of granular survey data 
+            <p>Change needs to occur on both sides of the divide, and the Bank of England's release of granular survey data
                 can illustrate how this can be bridged. I created this visualization to help move back and forth intelligently
-                between detailed survey data and broad economic concepts, and I hope this can be used to inspire more 
+                between detailed survey data and broad economic concepts, and I hope this can be used to inspire more
                 collaborative innovation between these two fields.</p>
             <p>Start by choosing an economic concept below you'd like to visualize.</p>
         </div>
@@ -71,13 +71,13 @@
             <svg style='height:600px'/>
         </div>
         <div id="EconDescription3" class="hidden">
-            <p>The Bank of England performs a quarterly survey of the Business community across the UK. Included in these surveys 
-                is a set of quantitative scores. These scores range from a low of -5 to a high of 5, and across eleven economic 
-                concepts: demand (nominal turnover), exports, investment, capacity utilisation, employment, recruitment 
-                conditions, total labour costs per employee, pay (salary per employee), non-labour costs, output prices, and 
+            <p>The Bank of England performs a quarterly survey of the Business community across the UK. Included in these surveys
+                is a set of quantitative scores. These scores range from a low of -5 to a high of 5, and across eleven economic
+                concepts: demand (nominal turnover), exports, investment, capacity utilisation, employment, recruitment
+                conditions, total labour costs per employee, pay (salary per employee), non-labour costs, output prices, and
                 profits (growth in pre-tax profit as share of turnover).</p>
             <p>According to their documentation: <a href="http://www.bankofengland.co.uk/publications/Documents/quarterlybulletin/2013/qb130106.pdf">The Agents' Company Visit Scores</a>, The Bank of
-                England mapped seven of these score concepts to headline economic concepts coming from the Office of National 
+                England mapped seven of these score concepts to headline economic concepts coming from the Office of National
                 Statistics:</p>
             <table>
                 <tr>
@@ -114,7 +114,7 @@
                 </tr>
             </table>
             <p>In addition, each of these scores have a current and a future component. Because the economic concepts are time
-                series, the first comparison one could highlight of these scores is to view how average company visit scores have 
+                series, the first comparison one could highlight of these scores is to view how average company visit scores have
                 changed over time. In this initial level of analysis, the future scores, when aggregated, should show some insight
                 into how the economic concepts are expected to evolve. Below you can choose either current or future from the drop
                 down menu:</p>
@@ -125,7 +125,7 @@
         </div>
         <div id="MeanCVSDescription" class="hidden">
             <p>The mean company visit scores, for most concepts, track the percent changes of their corresponding economic
-                concepts. While the future scores give some foresight into how economic concepts will evolve, the real 
+                concepts. While the future scores give some foresight into how economic concepts will evolve, the real
                 strength of having access to the underlying company scores is to get an idea of the distribution of scores
                 in the economy.</p>
             <p>The scores released from the Bank of England include dates and broad industries to identify them. Below, choosing a
@@ -141,51 +141,51 @@
             <p>In these histograms, you can see how the distribution of company visit scores change over time. In a lot of cases,
                 one can visualize a near normal distribution moving back and forth depending on what its mean score is. Many
                 concepts have a spike at score 0, perhaps highlighting a human preference in the scoring.</p>
-            <p>As mentioned above, these scores are coded by broad sector. Selecting a sector from the drop down above will 
+            <p>As mentioned above, these scores are coded by broad sector. Selecting a sector from the drop down above will
                 update the histogram to display the distribution for that particular industry. In addition, the average company
                 visit score line graph will be updated as well.</p>
             <p>This allows someone to seamlessly move across different scales, and see how changes in scales roll up to average
-                behavior. The more differentiated classifications available, the more useful this sort of tool would be. For 
-                example, if demographic and geographic data were added to these scores for example, one could filter by the 
+                behavior. The more differentiated classifications available, the more useful this sort of tool would be. For
+                example, if demographic and geographic data were added to these scores for example, one could filter by the
                 gender of the proprietor to see if women are more successful business owners in certain regions.</p>
         </div>
         <div id="CVSHist">
             <svg style='height:600px'/>
         </div>
         <div id="Concept2Description" class="hidden">
-            <p>Having the granular scores allow us to answer questions that could never be answered with top-down data. Dividing 
-                economic data into industries isn't the same as manipulating the underlying data. Once you're able to do that, 
+            <p>Having the granular scores allow us to answer questions that could never be answered with top-down data. Dividing
+                economic data into industries isn't the same as manipulating the underlying data. Once you're able to do that,
                 you can answer more sophisticated questions.</p>
             <p>Here for example, one can compare concepts on a firm by firm basis. This is beyond using one economic indicator to
-                predict another in an economic model. Here, one can actually see what happens to a firm with a certain 
+                predict another in an economic model. Here, one can actually see what happens to a firm with a certain
                 characteristic.</p>
-            <p>Choose a second concept from the drop down menu below to view a scatter plot across two types of Company Visit 
+            <p>Choose a second concept from the drop down menu below to view a scatter plot across two types of Company Visit
                 Scores.</p>
         </div>
         <div id="Concept2DropDown"></div>
         <div id="GoogleChart" class="hidden" style="width: 1200px; height: 600px;">
         </div>
         <div id="Concept2Description2" class="hidden">
-            <p>This graph shows a motion plot of two types of company visit scores. The original concept is on the x-axis and 
-                the new concept is on the Y-axis.</p> 
-            <p>The raw data is filtered by the original concept's score (from -5 to 5). For each of these groups, the average 
-                of the second score is taken. This graph is animated by time, and the size of the circles correspond to the number 
+            <p>This graph shows a motion plot of two types of company visit scores. The original concept is on the x-axis and
+                the new concept is on the Y-axis.</p>
+            <p>The raw data is filtered by the original concept's score (from -5 to 5). For each of these groups, the average
+                of the second score is taken. This graph is animated by time, and the size of the circles correspond to the number
                 of companies with the corresponding original score.</p>
-            <p>Granular data can be used to answer questions about individual actors in the economy in a way that even the most 
-                precisely industry breakdown won't be able to. While this visualization can serve as a model, there is still a lot 
+            <p>Granular data can be used to answer questions about individual actors in the economy in a way that even the most
+                precisely industry breakdown won't be able to. While this visualization can serve as a model, there is still a lot
                 more work to be done.</p>
-            <p>I believe economic concepts should be rethought in the age of big data. Economic aggregations as they currently 
-                exist can trace their pedigree back to John Maynard Keynes' work following the Great Depression, and even further 
-                back to the founders of the field. These mental frameworks existed because people needed a way to express what was 
-                happening in an economy with imperfect information. While our information is far from perfect, we're closer than 
-                ever to being able to form a complete picture of the economy from the ground up. How important is GDP when the 
-                data behind every consumer purchase and investment is available electronically? How important are baskets of goods 
+            <p>I believe economic concepts should be rethought in the age of big data. Economic aggregations as they currently
+                exist can trace their pedigree back to John Maynard Keynes' work following the Great Depression, and even further
+                back to the founders of the field. These mental frameworks existed because people needed a way to express what was
+                happening in an economy with imperfect information. While our information is far from perfect, we're closer than
+                ever to being able to form a complete picture of the economy from the ground up. How important is GDP when the
+                data behind every consumer purchase and investment is available electronically? How important are baskets of goods
                 when the price of everything can be researched online?</p>
-            <p>Despite this, the economic work done by our predecessors cannot be forgotten. We've only had this enhanced view of 
-                our economy for a handful of years. It's extremely useful to perform deep historical dives in order to get a long 
-                enough view of the dynamics of human economies. Just as economic data needs to be atomized, the granular data 
+            <p>Despite this, the economic work done by our predecessors cannot be forgotten. We've only had this enhanced view of
+                our economy for a handful of years. It's extremely useful to perform deep historical dives in order to get a long
+                enough view of the dynamics of human economies. Just as economic data needs to be atomized, the granular data
                 being created needs to be scrutinized, and added to a common framework that includes what we have historically.<p>
-            <p>It's in this way I hope the best of both worlds can be achieved, and we can combine the wisdom of our predecessors 
+            <p>It's in this way I hope the best of both worlds can be achieved, and we can combine the wisdom of our predecessors
                 with today's technological advances.</p>
         </div>
 
