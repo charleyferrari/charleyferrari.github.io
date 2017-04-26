@@ -402,7 +402,7 @@ d3.select("#EconDropDown select")
 
 function drawEconGraph(){
 
-  d3.csv("econdata.csv", function(error, data){
+  d3.csv("https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/econdata.csv", function(error, data){
 
       function econData(concept) {
 
@@ -461,7 +461,7 @@ function drawEconGraph(){
 
 function drawMeanCVSGraph(){
 
-  d3.csv("meancvs.csv", function(error, data){
+  d3.csv("https://raw.githubusercontent.com/charleyferrari/charleyferrari.github.io/master/meancvs.csv", function(error, data){
 
       function meanCVSData(concept, sector, currentOrFuture) {
 
@@ -524,7 +524,7 @@ function drawMeanCVSGraph(){
 
 function drawCVSHist(){
 
-  d3.csv("agents.csv", function(error, data){
+  d3.csv("https://raw.githubusercontent.com/charleyferrari/charleyferrari.github.io/master/agents.csv", function(error, data){
 
     function surveyData(sector, ActualDate, currentOrFuture, concept){
       // var parseDate = d3.time.format("%m/%d/%Y").parse;
@@ -606,7 +606,7 @@ function drawGoogleChart() {
     };
   });
 
-  d3.csv("agents.csv", function(error, data){
+  d3.csv("https://raw.githubusercontent.com/charleyferrari/charleyferrari.github.io/master/agents.csv", function(error, data){
     function googleSurveyData(sector, currentOrFuture, concept1, concept2){
 
       function increment(item){
