@@ -59,17 +59,17 @@ var conceptMap = [
 ///////////////////////////////////////////////
 // The variables that the user can choose between are defined
 // globally, because they can apply to multiple graphs. The user will have the choice
-// of choosing the following, in order: 
+// of choosing the following, in order:
 ///////////////////////////////////////////////
 
 ///////////////////////////////////////////////
-// EconConcept: one out of Value Add, Exports, Business Investment, Total Employment, 
+// EconConcept: one out of Value Add, Exports, Business Investment, Total Employment,
 // Average Weekly Earnings: Total, Average Weekly Earnings: Regular Pay, Gross Operating Surplus
 
 // CurrentOrFuture: Whether or not to use the current or future scores
 
-// Sector: one out of "Total", "Business and financial services", 
-// D"istribution, hotels, catering, arts, entertainment, recreation and other services", 
+// Sector: one out of "Total", "Business and financial services",
+// D"istribution, hotels, catering, arts, entertainment, recreation and other services",
 // "Production", and "Transport, storage, and communications"
 
 // Date: Quarterly dates from 2008Q1 to 2012Q4
@@ -84,7 +84,7 @@ var conceptMap = [
 ///////////////////////////////////////////////
 // These all have default values, but the action of choosing a value will draw the graph
 // in MOST cases. The only exception is the motion chart, which had to be kept hidden.
-// The effect is the same however, as the user will have to choose a second score type in 
+// The effect is the same however, as the user will have to choose a second score type in
 // order to remove the hidden attribute from its div. From the user's perspective, he or she
 // is drawing the graph by choosing a concept.
 ///////////////////////////////////////////////
@@ -94,7 +94,7 @@ var globalCurrentOrFuture = "Current";
 var globalEconConcept = "ValueAdd";
 var globalSector = "Total";
 var globalDate = "7/1/2008";
-var sectorList = ["Total", "Business and financial services", 
+var sectorList = ["Total", "Business and financial services",
   "Distribution, hotels, catering, arts, entertainment, recreation and other services",
   "Production", "Transport, storage and communications"];
 
@@ -132,9 +132,9 @@ dateList.forEach(function(d){
 // EconChart: A line graph of the economic concept as defined in globalEconConcept
 
 // CVSChart: A line graph of the score type as defined in globalCVSConcept, which is mapped
-// from the conceptMap filtered by a sector, defined by globalSector. 
+// from the conceptMap filtered by a sector, defined by globalSector.
 // The score is either current or future, chosen by the user and defined by globalCurrentOrFuture
-// When first drawn, the sector is total by default. Once the sector drop down is created, 
+// When first drawn, the sector is total by default. Once the sector drop down is created,
 // the graph will redraw as globalSector is changed.
 
 // CVSHist: A histogram of:
@@ -155,21 +155,21 @@ dateList.forEach(function(d){
 // and globalCVSConcept through the CVS Map.
 
 // currentOrFutureDropDown affects the CVSChart, CVSHist, and google chart. If the chart is present,
-// it will force a redraw based on the current global variables. 
+// it will force a redraw based on the current global variables.
 
 // DateDropDown only affects CVSHist
 
-// SectorDropDown affects CVSHist and google chart. It will technically redraw the google chart whenever it's 
+// SectorDropDown affects CVSHist and google chart. It will technically redraw the google chart whenever it's
 // chosen, but if the google chart is hidden the user won't notice.
 
 // Concept2DropDown affects only the google chart. It will unhide the existing chart, and redraw it if it's being
 // changed.
 
-// The google chart is technically present even when the EconDropDown is chosen. Because of limits within 
+// The google chart is technically present even when the EconDropDown is chosen. Because of limits within
 // google chart's functionality, I couldn't set a function to draw the chart from scratch. I was forced to have
 // the chart drawn once the page is first loaded, with a default second concept chosen. To get around this limitation,
 // I set the div as hidden initially. Once the second concept is chosen, the hidden tag is removed, and the graph
-// is redrawn with the second concept the user specified. From the user's perspective, he or she is drawing the graph 
+// is redrawn with the second concept the user specified. From the user's perspective, he or she is drawing the graph
 // from scratch.
 
 ///////////////////////////////////////////////
@@ -243,10 +243,10 @@ var econChange = function(){
 
     d3.select("#MeanCVSDescription")
       .classed("hidden", false);
-  
+
     if(d3.select("#DateDropDown select").empty()){
       d3.select("#DateDropDown").append("select");
-      
+
       d3.select("#DateDropDown select")
         .selectAll("option")
         .data(dateList)
@@ -282,7 +282,7 @@ var econChange = function(){
         d3.select("#SectorDropDown select")
           .insert("option", ":first-child")
           .text("")
-          .attr("value", "");  
+          .attr("value", "");
       }
 
 
@@ -304,7 +304,7 @@ var econChange = function(){
             .text(function(d) { return d.econTitle; } )
             .attr("value", function(d) { return d.score; } );
 
-          d3.select("#Concept2DropDown select")          
+          d3.select("#Concept2DropDown select")
             .insert("option", ":first-child")
             .text("")
             .attr("value", "");
@@ -402,7 +402,7 @@ d3.select("#EconDropDown select")
 
 function drawEconGraph(){
 
-  d3.csv("econdata.csv", function(error, data){ 
+  d3.csv("econdata.csv", function(error, data){
 
       function econData(concept) {
 
@@ -579,7 +579,7 @@ function drawCVSHist(){
 
         chart.yAxis
           .axisLabel("Number of Companies")
-          .tickFormat(function(d){ return Math.round(d); });  
+          .tickFormat(function(d){ return Math.round(d); });
 
         d3.select("#CVSHist svg")
             .datum(surveyData(globalSector,globalDate, globalCurrentOrFuture, globalCVSConcept))
@@ -605,7 +605,7 @@ function drawGoogleChart() {
       meanTally: [0,0,0,0,0,0,0,0,0,0,0]
     };
   });
-  
+
   d3.csv("agents.csv", function(error, data){
     function googleSurveyData(sector, currentOrFuture, concept1, concept2){
 
@@ -619,14 +619,14 @@ function drawGoogleChart() {
           googleRawData[item.ActualDateDisplay].meanTally[+item[concept1]+5] = concept2Score;
           googleRawData[item.ActualDateDisplay].surveyCount[+item[concept1]+5] += 1;
         } else{
-          googleRawData[item.ActualDateDisplay].meanTally[+item[concept1]+5] = 
+          googleRawData[item.ActualDateDisplay].meanTally[+item[concept1]+5] =
             (currentMean * currentCount + concept2Score) / (currentCount + 1);
             googleRawData[item.ActualDateDisplay].surveyCount[+item[concept1]+5] += 1;
         }
 
-        
+
       }
-      
+
       data.forEach(function(d){
         if(sector == "Total"){
           if(d.ScoreType == currentOrFuture){
@@ -667,6 +667,6 @@ function drawGoogleChart() {
     var chart = new google.visualization.MotionChart(document.getElementById('GoogleChart'));
     chart.draw(chartData, {width: 1200, height:600});
 
-  });  
+  });
 
 }
