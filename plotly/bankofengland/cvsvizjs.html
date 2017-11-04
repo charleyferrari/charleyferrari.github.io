@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plot.ly Demo</title>
+  <link rel="shortcut icon" href="https://plot.ly/gh-pages/documentation/static//images/plotly-ico.png" />
+  <!-- Load Style Sheets -->
+  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/keen-dashboards.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/custom.css" />
+</head>
+
+<body class="application">
+  <!-- Header Section -->
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <img src="boe.jpg">
+        <a class="navbar-brand" href="#">Bank of England: Company Visit Score Explorer</a>
+      </div>
+    </div>
+  </div>
+  <!-- Begin Content Area -->
+  <div class="container-fluid">
+    <!-- First Row with two equal columns -->
+    <div class="row">
+      <!-- Begin Column One - columns classes must add up to twelve: https://getbootstrap.com/examples/grid/ -->
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <div id="econdropdown">
+              Economic Concept: <select id="econselect" ></select>
+            </div>
+          </div>
+          <div class="chart-stage">
+              <div id="econgraph"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Begin Column Two - columns classes must add up to twelve: https://getbootstrap.com/examples/grid/ -->
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <div id="currentorfuturedropdown">
+              Score Type: <select id="currentorfutureselect"></select>
+            </div>
+          </div>
+          <div class="chart-stage">
+            <div id="meancvsgraph"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row with two equal columns -->
+    <div class="row">
+      <!-- Begin Column One - columns classes must add up to twelve: https://getbootstrap.com/examples/grid/ -->
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <div class="row">
+              <div class="col-sm-6">
+                <div id="sectordropdown">
+                  Sector: <select id="sectorselect"></select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div id="datedropdown">
+                  Date: <select id="dateselect"></select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-stage">
+              <div>
+                <iframe id="histframe" width="100%" height="480px" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/241.embed"></iframe>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- Begin Column Two - columns classes must add up to twelve: https://getbootstrap.com/examples/grid/ -->
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <div id="secondscoredropdown">
+              Second Concept: <select id="secondscoreselect"></select>
+            </div>
+            </div>
+          <div class="chart-stage">
+            <iframe id="secondscoreframe" width="100%" height="480px" frameborder="0" scrolling="no" src="https://plot.ly/~charleyferrari/243.embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <!-- Footer Section -->
+    <p class="small text-muted">
+      &copy2016 Your Project Name.
+    </p>
+
+  </div>
+
+  <!-- Load Scripts -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./static/js/d3/d3.min.js"></script>
+  <script src="./static/js/cvsviz.js"></script>
+  <script src="./static/js/holderjs/holder.js"></script>
+
+  <script>
+    Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
+  </script>
+
+</body>
+</html>
