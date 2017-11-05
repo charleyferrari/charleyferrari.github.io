@@ -14,9 +14,6 @@
     <div class="cartodb-popup">
       <a href="#close" class="cartodb-popup-close-button close">x</a>
        <div class="cartodb-popup-content-wrapper">
-         <div class="cartodb-popup-header">
-           <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
-         </div>
          <div class="cartodb-popup-content">
            <!-- content.data contains the field info -->
            <h4>Stop ID: </h4>
@@ -31,9 +28,6 @@
     <div class="cartodb-popup">
       <a href="#close" class="cartodb-popup-close-button close">x</a>
        <div class="cartodb-popup-content-wrapper">
-         <div class="cartodb-popup-header">
-           <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
-         </div>
          <div class="cartodb-popup-content">
            <!-- content.data contains the field info -->
            <h4>Stop Name: </h4>
@@ -50,7 +44,7 @@
     var map;
     function init(){
       // initiate leaflet map
-      map = new L.Map('cartodb-map', { 
+      map = new L.Map('cartodb-map', {
         center: [40.696848,-73.993422],
         zoom: 14
       })
@@ -107,7 +101,7 @@
 
             // sql.execute("SELECT * FROM subwaypoly WHERE cartodb_id = {{id}}", {id: data.cartodb_id}).done(function(data){console.log(data.rows);})
 
-            // SELECT * FROM gtdelta00018 WHERE subwayid = SELECT stopid FROM subwaypoly WHERE cartodb_id = 
+            // SELECT * FROM gtdelta00018 WHERE subwayid = SELECT stopid FROM subwaypoly WHERE cartodb_id =
 
 
           });
@@ -115,7 +109,7 @@
           console.log("some error occurred");
           //log the error
         });
-    }  
+    }
   </script>
 </head>
 
