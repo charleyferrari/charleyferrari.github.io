@@ -592,8 +592,10 @@ function drawCVSHist(){
 
   /////////////////////////////////////////////////////////////////////////
 
-google.load("visualization", "1", {packages:["motionchart"]});
-google.setOnLoadCallback(drawGoogleChart);
+// google.load("visualization", "1", {packages:["motionchart"]});
+google.charts.load('current', {packages:["motionchart"]});
+// google.setOnLoadCallback(drawGoogleChart);
+google.charts.setOnLoadCallback(drawGoogleChart);
 function drawGoogleChart() {
   googleRawData = {};
 
@@ -639,6 +641,8 @@ function drawGoogleChart() {
       });
 
     }
+
+    console.log(googleRawData);
 
     googleSurveyData(globalSector, globalCurrentOrFuture, globalCVSConcept, globalCVSConcept2);
 
