@@ -740,7 +740,7 @@ function drawGoogleChart() {
           pad: {l: 130, t: 55},
           currentvalue: {
             visible: true,
-            prefix: 'Year:',
+            prefix: 'Date:',
             xanchor: 'right',
             font: {size: 20, color: '#666'}
           },
