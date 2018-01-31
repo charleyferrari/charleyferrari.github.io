@@ -593,9 +593,9 @@ function drawCVSHist(){
   /////////////////////////////////////////////////////////////////////////
 
 // google.load("visualization", "1", {packages:["motionchart"]});
-google.charts.load('current', {packages:["motionchart"]});
+// google.charts.load('current', {packages:["motionchart"]});
 // google.setOnLoadCallback(drawGoogleChart);
-google.charts.setOnLoadCallback(drawGoogleChart);
+// google.charts.setOnLoadCallback(drawGoogleChart);
 function drawGoogleChart() {
   googleRawData = {};
 
@@ -642,8 +642,6 @@ function drawGoogleChart() {
 
     }
 
-    console.log(googleRawData);
-
     googleSurveyData(globalSector, globalCurrentOrFuture, globalCVSConcept, globalCVSConcept2);
 
     var dataForGoogle = [];
@@ -658,16 +656,111 @@ function drawGoogleChart() {
       }
     });
 
-    var chartData = new google.visualization.DataTable();
-    chartData.addColumn('string', globalCVSConcept);
-    chartData.addColumn('date', 'Date');
-    chartData.addColumn('number', globalCVSConcept);
-    chartData.addColumn('number', globalCVSConcept2);
-    chartData.addColumn('string', 'Blue');
-    chartData.addColumn('number', 'SurveyCount');
-    chartData.addRows(dataForGoogle);
-    var chart = new google.visualization.MotionChart(document.getElementById('GoogleChart'));
-    chart.draw(chartData, {width: 1200, height:600});
+    var traces = [];
+    var sliderSteps = [];
+    var ymax = -1000;
+    var ymin = 1000;
+    dateList.forEach(function(d){
+        traces.push({
+            name: d,
+            x: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+            y: googleRawData[d].meanTally,
+            mode: 'markers',
+            marker: {
+                size: googleRawData[d].surveyCount,
+                sizemode: 'area',
+                sizeref: 0.05
+            }
+        });
+        sliderSteps.push({
+            method: 'animate',
+            label: d,
+            args: [[d], {
+                mode: 'immediate',
+                transition: {duration: 300},
+                frame: {duration: 300, redraw: false}
+            }]
+        });
+        googleRawData[d].meanTally.forEach(function(d){
+            if(d > ymax){
+                ymax = d;
+            }
+            if(d < ymin){
+                ymin = d
+            }
+        })
+    });
+
+    var xaxistitle;
+    conceptMap.forEach(function(d){
+        if(globalEconConcept == d.econ){
+            xaxistitle = d.score
+        }
+    });
+
+
+
+    var layout = {
+        xaxis: {
+            title: xaxistitle
+        },
+        yaxis: {
+            title: globalCVSConcept2,
+            range: [ymin, ymax]
+        },
+        updatemenus: [{
+          x: 0,
+          y: 0,
+          yanchor: 'top',
+          xanchor: 'left',
+          showactive: false,
+          direction: 'left',
+          type: 'buttons',
+          pad: {t: 87, r: 10},
+          buttons: [{
+            method: 'animate',
+            args: [null, {
+              mode: 'immediate',
+              fromcurrent: true,
+              transition: {duration: 300},
+              frame: {duration: 500, redraw: false}
+            }],
+            label: 'Play'
+          }, {
+            method: 'animate',
+            args: [[null], {
+              mode: 'immediate',
+              transition: {duration: 0},
+              frame: {duration: 0, redraw: false}
+            }],
+            label: 'Pause'
+          }]
+        }],
+        sliders: [{
+          pad: {l: 130, t: 55},
+          currentvalue: {
+            visible: true,
+            prefix: 'Year:',
+            xanchor: 'right',
+            font: {size: 20, color: '#666'}
+          },
+          steps: sliderSteps
+        }]
+    };
+
+    var frames = [];
+    traces.forEach(function(d){
+        frames.push({
+            name: d.name,
+            data: [d]
+        });
+    });
+
+    Plotly.newPlot('GoogleChart', {data: [traces[0]], layout: layout, frames: frames}, {displayModeBar: false});
+
+    console.log(frames);
+    // var chart = new google.visualization.MotionChart(document.getElementById('GoogleChart'));
+    // chart.draw(chartData, {width: 1200, height:600});
 
   });
 
