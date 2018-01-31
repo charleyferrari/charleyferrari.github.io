@@ -1,6 +1,4 @@
-///////////////////////////////////////////////
-// OH GOD YOU NEED TO RELATE CURRENT OR FUTURE TO THE GOOGLE CHARTNO NO NO
-///////////////////////////////////////////////
+
 
 ///////////////////////////////////////////////
 // The concept map dictionary allows me to relate economic concepts
@@ -461,7 +459,7 @@ function drawEconGraph(){
 
 function drawMeanCVSGraph(){
 
-  d3.csv("https://raw.githubusercontent.com/charleyferrari/charleyferrari.github.io/master/meancvs.csv", function(error, data){
+  d3.csv("https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/meancvs.csv", function(error, data){
 
       function meanCVSData(concept, sector, currentOrFuture) {
 
