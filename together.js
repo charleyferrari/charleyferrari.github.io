@@ -756,7 +756,7 @@ function drawGoogleChart() {
         });
     });
 
-    Plotly.newPlot('GoogleChart', {data: [traces[0]], layout: layout, frames: frames}, {layout: layout}, {displayModeBar: false});
+    Plotly.newPlot('GoogleChart', {data: [traces[0]], layout: layout, frames: frames, config: {displayModeBar: false}});
 
     console.log(frames);
     // var chart = new google.visualization.MotionChart(document.getElementById('GoogleChart'));
