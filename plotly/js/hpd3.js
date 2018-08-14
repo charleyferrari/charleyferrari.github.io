@@ -86,7 +86,7 @@ Plotly.d3.csv(
       var data = [trace1, trace2, trace3];
 
       var layout = {
-        title: 'Line and Scatter Plot',
+        title: 'Housing Prices Across Tiers',
         height: 400,
         width: 480
       };
