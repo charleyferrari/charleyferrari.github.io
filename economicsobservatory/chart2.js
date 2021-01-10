@@ -1,4 +1,4 @@
-Plotly.d3.csv('./used_manchester.csv', d => {
+Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyferrari.github.io/master/economicsobservatory/used_manchester.csv', d => {
     console.log(d);
     let x = [], y = [], color = [];
 
