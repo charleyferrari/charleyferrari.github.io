@@ -1,4 +1,4 @@
-Plotly.d3.csv('used_manchester.csv', d => {
+Plotly.d3.csv('./used_manchester.csv', d => {
     console.log(d);
     let x = [], y = [], color = [];
 

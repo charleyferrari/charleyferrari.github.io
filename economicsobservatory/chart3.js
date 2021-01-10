@@ -1,4 +1,4 @@
-Plotly.d3.csv('used_life_ex.csv', d => {
+Plotly.d3.csv('./used_life_ex.csv', d => {
     console.log(d);
     let xbar = [], ybar = [], xline = [], yline;
 
