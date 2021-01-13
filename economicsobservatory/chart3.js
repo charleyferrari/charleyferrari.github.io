@@ -46,7 +46,7 @@ Plotly.d3.csv('https://media.githubusercontent.com/media/charleyferrari/charleyf
         },
         'legend': {
             'yanchor': 'bottom',
-            'y': -0.15,
+            'y': -0.21,
             'xanchor': 'right',
             'x': 0.5
         }
