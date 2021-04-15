@@ -49,9 +49,7 @@
         zoom: 13
       })
 
-      L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
-        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
-      }).addTo(map);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png').addTo(map);
 
       var layerUrl = 'https://charleyferrari.cartodb.com/api/v2/viz/c6ad555e-0eec-11e5-89b2-0e0c41326911/viz.json';
 
