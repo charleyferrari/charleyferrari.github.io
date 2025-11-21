@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Queens Streets + Historic 1891 Map</title>
+
+  <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
+
+  <!-- Leaflet (for smooth panning/zooming image map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #111;
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      font-family: sans-serif;
+    }
+    #left, #right {
+      flex: 1;
+      position: relative;
+    }
+    #right {
+      border-left: 2px solid #222;
+    }
+    #map {
+      width: 100%; height: 100%;
+    }
+    #historicMap {
+      width: 100%; height: 100%;
+    }
+
+    /* --------------------------
+       LEGEND STYLING (NEW)
+       -------------------------- */
+    #legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.65);
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: #eee;
+      font-size: 13px;
+      line-height: 1.4;
+      z-index: 9999;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .legend-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- LEFT: modern slippy map -->
+<div id="left">
+  <div id="map"></div>
+
+  <!-- ⭐ NEW: Legend box -->
+  <div id="legend">
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#5f8cff;"></div>
+      Primary numbered streets & avenues
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#ff00e6;"></div>
+      Secondary numbered streets (Pl, Rd, Ter, etc.)
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#48d1b6;"></div>
+      Named streets
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT: Leaflet image-based slippy map -->
+<div id="right">
+  <div id="historicMap"></div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   LEFT SIDE — MapLibre modern street map
+-------------------------------------------------------------------*/
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: {
+    "version": 8,
+    "sources": {},
+    "layers": []
+  },
+  center: [-73.85, 40.73],
+  zoom: 10.5
+});
+
+// Colors
+const primaryColor   = "#5f8cff";
+const secondaryColor = "#ff00e6";
+const namedColor     = "#48d1b6";
+
+map.on("load", () => {
+  map.addLayer({
+    id: "background",
+    type: "background",
+    paint: { "background-color": "#111" }
+  });
+
+  map.addSource("streets", {
+    type: "geojson",
+    data: "./Queens_Streets_Simplified_WGS84.geojson"
+  });
+
+  map.addLayer({
+    id: "streets-layer",
+    type: "line",
+    source: "streets",
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: {
+      "line-width": 1.3,
+      "line-color": [
+        "match",
+        ["get", "class"],
+        "primary",   primaryColor,
+        "secondary", secondaryColor,
+        "named",     namedColor,
+        "#444"
+      ]
+    }
+  });
+});
+
+/* ------------------------------------------------------------------
+   RIGHT SIDE — Smooth zoom/pan historic map using Leaflet
+-------------------------------------------------------------------*/
+
+const w = 4000;  
+const h = 2500;  
+
+const bounds = [[0,0], [h, w]];
+
+const histMap = L.map('historicMap', {
+  crs: L.CRS.Simple,
+  minZoom: -4,
+  maxZoom: 3,
+  zoomSnap: 0.1,
+  zoomDelta: 0.4,
+  wheelPxPerZoomLevel: 80,
+  zoomAnimation: true,
+  zoomAnimationThreshold: 10,
+  scrollWheelZoom: true,
+  wheelDebounceTime: 0,
+  zoomControl: true
+});
+
+const image = L.imageOverlay('queens-historic.jpg', bounds).addTo(histMap);
+histMap.fitBounds(bounds);
+
+</script>
+
+</body>
+</html>
