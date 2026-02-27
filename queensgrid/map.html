@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Queens Street Classification Viewer</title>
+  <style>
+    body { margin: 0; padding: 0; background: #111; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  </style>
+
+  <!-- MapLibre GL JS -->
+  <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+// --- Initialize map with NO basemap ---
+const map = new maplibregl.Map({
+  container: 'map',
+  style: {
+    "version": 8,
+    "name": "No Basemap",
+    "sources": {},
+    "layers": []
+  },
+  center: [-73.85, 40.73],
+  zoom: 10.6
+});
+
+// --- New color scheme ---
+const primaryColor   = "#5f8cff";   // soft muted blue
+const secondaryColor = "#ff00e6";   // LOUD neon magenta
+const namedColor     = "#48d1b6";   // muted green-teal
+
+map.on('load', () => {
+
+  // Dark background
+  map.addLayer({
+    id: "background",
+    type: "background",
+    paint: { "background-color": "#111" }
+  });
+
+  // Street data source
+  map.addSource('streets', {
+    type: 'geojson',
+    data: './Queens_Streets_Simplified_WGS84.geojson'
+  });
+
+  // Classified line layer
+  map.addLayer({
+    id: 'streets-layer',
+    type: 'line',
+    source: 'streets',
+    layout: {
+      "line-join": "round",
+      "line-cap": "round"
+    },
+    paint: {
+      "line-width": 1.3,
+      "line-opacity": 1.0,
+      "line-color": [
+        "match",
+        ["get", "class"],
+        "primary",   primaryColor,
+        "secondary", secondaryColor,
+        "named",     namedColor,
+        "#888888"
+      ]
+    }
+  });
+});
+</script>
+
+</body>
+</html>
